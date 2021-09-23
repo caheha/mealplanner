@@ -1,0 +1,47 @@
+[{
+    "title": "Spaghetti Carbonara",
+    "description": "Et klassisk pastaret fra Italien.",
+    "img": "https://mummum.dk/wp-content/uploads/2020/05/P1160155.jpg",
+    "rating": 2,
+    "time": 20,
+    "price": "Middel",
+
+    "country": "italien",
+    
+    "gluten": true,
+    "vegetarian": true,
+    "vegan": true,
+    "sugar": true,
+    "dairy": true,
+
+    "season": "",
+    "theme": "",
+    "holiday": "",
+
+
+    "ingredients": [],
+    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
+},{
+    "title": "Spaghetti Carbonara",
+    "description": "Et klassisk pastaret fra Italien.",
+    "img": "https://mummum.dk/wp-content/uploads/2020/05/P1160155.jpg",
+    "rating": 4,
+    "time": 20,
+    "price": "Lav",
+
+    "country": "italien",
+    
+    "gluten": true,
+    "vegetarian": true,
+    "vegan": false,
+    "sugar": false,
+    "dairy": true,
+
+    "season": "",
+    "theme": "",
+    "holiday": "",
+
+
+    "ingredients": [],
+    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
+}]

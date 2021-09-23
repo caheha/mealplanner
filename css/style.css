@@ -1,0 +1,346 @@
+/* -----------------------------------------------
+                      Reset
+----------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* -----------------------------------------------
+                      Theme
+----------------------------------------------- */
+:root {
+    --green: #A8C1A6;
+    --light-green: rgb(172, 198, 201);
+    --light-grey: #EDEDED;
+    --text-color-light: #ffffff;
+    --text-color-dark: #707070;
+    --text-color-opacity: rgba(70, 70, 70, 0.6);
+    --white: #fff;
+    --font-family: "Poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html {
+    color: var(--text-color-dark);
+    font-family: var(--font-family);
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 400;
+    letter-spacing: 3px;
+}
+
+h3 {
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0.5em 0 0.2em;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+/* -----------------------------------------------
+                      Navigation
+----------------------------------------------- */
+/* Align navbar at bottom of page and align icons */
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    
+    height: 4em;
+    background-color: var(--white);
+    
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+/* Align icon with title and styling */
+.navigation a {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color-opacity);
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.6em;
+}
+
+/* Icon size */
+.navigation a span {
+    font-size: 4em;
+    margin-bottom: 0.05em;
+}
+
+/* Change the color of links on hover */
+.navigation a:hover {
+    color: var(--text-color-dark);
+}
+
+/* Add a color to the active/current link */
+.navigation a.active {
+    color: var(--green);
+}
+
+/* -----------------------------------------------
+                      Header
+----------------------------------------------- */
+.header {
+    background-color: var(--green);
+    color: var(--text-color-light);
+    position: fixed;
+    height: 4em;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    line-height: 4em;
+}
+
+.header h2 {
+    text-align: center;
+    font-weight: 400;
+}
+
+.header a.left {
+    left: 1.5em;
+}
+
+.header a.right {
+    right: 1.5em;
+}
+
+
+/* -----------------------------------------------
+                      Pages
+----------------------------------------------- */
+.page {
+    display: none;
+    /*min heigh is screen heigh minus height of navigation and header */
+    min-height: calc(100vh - 8em);
+    background: var(--light-grey);
+    animation: fadeIn 0.4s;
+    /* padding equals height of navigation and header */
+    padding: 4em 0;
+}
+
+/* ---------- Animations ---------- */
+/* Fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ---------- Spinning loader ---------- */
+#loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    overflow: hidden;
+    background: var(--loader-background-color);
+    text-align: center;
+}
+
+.spinner {
+    border: 5px solid var(--light-grey);
+    border-radius: 50%;
+    border-top: 5px solid var(--light-green);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 1s linear infinite;
+    /* Safari */
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.4s, opacity 0.4s linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+}
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* -----------------------------------------------
+                      Forms
+----------------------------------------------- */
+form {
+    background-color: var(--light-green);
+    padding: 2em 1em 2.5em;
+}
+
+form button {
+    font-weight: 200;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1em;
+    border-radius: 0;
+    color: var(--text-color-light);
+    background-color: var(--green);
+    width: 100%;
+    max-width: 350px;
+}
+
+article button {
+    font-weight: 200;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    padding: 10px 8px;
+    border-radius: 0;
+    color: var(--text-color-light);
+    background-color: var(--green);
+    width: 40%;
+    text-transform: uppercase;
+}
+
+input {
+    margin: 1em auto;
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* -----------------------------------------------
+                   Grid container
+----------------------------------------------- */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1em;
+    gap: 1em;
+}
+
+@media (min-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+
+/* -----------------------------------------------
+                   Recipes
+----------------------------------------------- */
+/* Article wrapper of a single recipe */
+.grid-container > .recipe-container {
+    background-color: var(--white);
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Icon size */
+.grid-container > .recipe-container span {
+    font-size: 24px;
+}
+
+/* Text size */
+.recipe-container h2, .recipe-container p {
+    font-size: 13px;
+}
+
+/* White box over and below image */
+.recipe-container .top, .recipe-container .bottom {
+    position: relative;
+    height: 2em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.recipe-container .bottom {
+    justify-content: space-between;
+    padding: 0 0.5em;
+}
+
+/* Icons in top left */
+.recipe-container .top > div {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.5em;
+}
+
+.recipe-container .top > div > img {
+    width: 1.25em;
+    margin-right: 2px;
+    display: block;
+}
+
+/* Favorite icon top right */
+.recipe-container .top > span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8px;
+}
+
+/* Bottom elements */
+.recipe-container .bottom > p {
+    display: flex;
+    align-items: center;
+}
+
+/* Margin between text and clock icon */
+.recipe-container .bottom p:nth-child(2) span {
+    margin-right: 4px;
+}
+
+/* Image wrapper to contain image size, hide overflow */
+.recipe-container .image-wrapper {
+    width: 100%;
+    height: 8em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recipe-container img {
+    width: 100%;
+    display: block;
+}
