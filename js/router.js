@@ -9,7 +9,8 @@ class Router {
             "#/opskrifter": "opskrifter",
             "#/favoritter": "favoritter",
             "#/madplan": "madplan",
-            "#/indkøbsliste": "indkøbsliste"
+            "#/indkøbsliste": "indkøbsliste",
+            "#/opskriftsdetaljer": "opskriftsdetaljer",
         };
         this.initRouter();
     }

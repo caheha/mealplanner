@@ -39,9 +39,22 @@
     <!-- Search recipes page -->
     <section id="opskrifter" class="page">
         <header class="header">
-            <h2>Søg</h2>
+            <div class="searchbar">
+                <span class="material-icons">search</span>
+                <input type="search" placeholder="Søg efter opskrifter eller ingredienser" onkeyup="search(this.value)">
+            </div>
         </header>
         <section class="grid-container" id="recipes-container"></section>
+    </section>
+
+    <!-- opskriftsdetaljer page -->
+    <section id="opskriftsdetaljer" class="page">
+        <header class="header">
+            <a class="nav-link" href="#/opskrifter"><span class="material-icons">chevron_left</span></a>
+            <h2>Detaljer</h2>
+        </header>
+        <section class="grid-container" id="recipe-detail-container"></section>
+        
     </section>
 
     <!-- edir user page -->
@@ -49,6 +62,7 @@
         <header class="header">
             <h2>Favoritter</h2>
         </header>
+        <section class="grid-container" id="favorites-container"></section>
     </section>
 
     <!-- edir user page -->

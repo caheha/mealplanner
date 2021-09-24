@@ -1,7 +1,9 @@
+let i = 0;
+
 export default class Recipe {
     constructor(title, description, img, rating, time, price, country, gluten, vegetarian, 
                 vegan, sugar, dairy, season, theme, holiday, ingredients, procedure) {
-        this.id = Date.now();
+        this.id = i++;
         this.title = title;
         this.description = description;
         this.img = img;
@@ -28,19 +30,76 @@ export default class Recipe {
     // Returnerer HTML der kan indsættes på siden
     getHtml() {
         return /*html*/`
-            <article class="recipe-container" onclick="alert('Details')">
+            <article class="recipe-container">
                 <div class="top">
                     <div>${this.returnIconHTML(this.gluten, this.vegetarian, this.vegan, this.sugar, this.dairy)}</div>
                     <h2>${this.title}</h2>
-                    <span class="material-icons" onclick="alert('Favorited')">favorite_outline</span>
+                    <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                 </div>
-                <div class="image-wrapper"><img src="${this.img}" alt="${this.title}"></div>
+                <div class="image-wrapper" onclick="goToDetails(${this.id})"><img src="${this.img}" alt="${this.title}"></div>
                 <div class="bottom">
                     <p>${this.returnStarsHTML(this.rating)}</p>
                     <p><span class="material-icons">schedule</span>${this.time} min</p>
                     <p><span class="material-icons">attach_money</span>${this.price}</p>
                     <span class="material-icons" onclick="alert('Added')">add</span>
                 </div>
+            </article>
+        `;
+    }
+
+    getDetailHTML() {
+        let ingredientsHTML = "";
+        for (const ingredient of this.ingredients) {
+            ingredientsHTML += /*html*/`
+                <tr>
+                    <td id="recipe-amount">${ingredient.amount}</td>
+                    <td>${ingredient.unit}</td>
+                    <td>${ingredient.name}</td>
+                </tr>
+                `;
+        }
+
+        let procedureHTML = "";
+        for (const procedure of this.procedure) {
+            procedureHTML += `<li>${procedure}</li>`;
+        }
+
+        return /*html*/`
+            <article class="recipe-details-container">
+                <div class="recipe-name">
+                    <h2>Spaghetti Carbonara</h2>
+                    <div class="icons" >${this.returnIconHTML(this.gluten, this.vegetarian, this.vegan, this.sugar, this.dairy)}</div>
+                    <div>
+                        <span class="material-icons">add</span>
+                        <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
+                     </div>
+                </div>
+                <div class="image-wrapper" onclick="goToDetails(${this.id})"><img src="${this.img}" alt="${this.title}"></div>
+                <div class="bottom">
+                    <p>${this.returnStarsHTML(this.rating)}</p>
+                    <p><span class="material-icons">schedule</span>${this.time} min</p>
+                    <p><span class="material-icons">attach_money</span>${this.price}</p>
+                </div>
+
+                <h3>Beskrivelse</h3>
+                <p>${this.description}</p>
+
+                <label for="sortBy">
+                    <select id="sortBy" onchange="multiplyAmount(this.value)">
+                        <option value="" selected disabled>Antal personer</option>
+                        <option value="1">1 personer</option>
+                        <option value="2">2 personer</option>
+                        <option value="3">3 personer</option>
+                        <option value="4">4 personer</option>
+                        <option value="5">5 personer</option>
+                    </select>
+                </label>
+                
+                <h3>Ingredienser</h3>
+                <table>${ingredientsHTML}</table>
+                
+                <h3>Fremgangsmåde</h3>
+                <ul>${procedureHTML}</ul>
             </article>
         `;
     }

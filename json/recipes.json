@@ -19,12 +19,12 @@
     "holiday": "",
 
 
-    "ingredients": [],
+    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
     "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
 },{
-    "title": "Spaghetti Carbonara",
+    "title": "Salat med varmrøget laks",
     "description": "Et klassisk pastaret fra Italien.",
-    "img": "https://mummum.dk/wp-content/uploads/2020/05/P1160155.jpg",
+    "img": "https://mummum.dk/wp-content/uploads/2021/09/IMG_7221-min-1536x1132.jpg",
     "rating": 4,
     "time": 20,
     "price": "Lav",
@@ -42,6 +42,29 @@
     "holiday": "",
 
 
-    "ingredients": [],
+    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
+    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
+},{
+    "title": "Vegetar bolognese",
+    "description": "Et klassisk pastaret fra Italien.",
+    "img": "https://mummum.dk/wp-content/uploads/2020/01/vegetarisk-bolognese-1350x1093.jpg",
+    "rating": 4,
+    "time": 20,
+    "price": "Lav",
+
+    "country": "italien",
+    
+    "gluten": true,
+    "vegetarian": true,
+    "vegan": false,
+    "sugar": false,
+    "dairy": true,
+
+    "season": "",
+    "theme": "",
+    "holiday": "",
+
+
+    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
     "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
 }]
