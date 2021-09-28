@@ -37,6 +37,7 @@ window.hideMenu = () => {
 
 window.search = (searchValue) => {
     mealplanner.search(searchValue);
+    mealplanner.appendFavorites(user.favorites);
 }
 
 window.searchFavorites = (searchValue) => {
