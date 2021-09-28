@@ -81,8 +81,8 @@ export default class User {
         this.saveUser();
     }
 
-    removeFoodPlan(foodPlanTodRemove) {
-        this.foodPlans = this.favorites.filter(foodPlan => foodPlan.id != foodPlanTodRemove.id);
+    removeFoodPlan(id) {
+        this.foodPlans = this.favorites.filter(foodPlan => foodPlan.id != id);
         this.saveUser();
     }
 }

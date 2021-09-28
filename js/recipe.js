@@ -41,7 +41,7 @@ export default class Recipe {
                     <p>${this.returnStarsHTML(this.rating)}</p>
                     <p><span class="material-icons">schedule</span>${this.time} min</p>
                     <p><span class="material-icons">attach_money</span>${this.price}</p>
-                    <span class="material-icons" onclick="alert('Added')">add</span>
+                    <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id}, 1)">add</span>
                 </div>
             </article>
         `;
@@ -59,7 +59,7 @@ export default class Recipe {
                     <h2>${this.title}</h2>
                     <div class="icons" >${this.returnIconHTML(this.glutenfree, this.vegetarian, this.vegan, this.sugarfree, this.dairyfree)}</div>
                     <div>
-                        <span class="material-icons" onclick="addToFoodPlan(${this.id})">add</span>
+                        <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id}, 2)">add</span>
                         <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                      </div>
                 </div>

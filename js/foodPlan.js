@@ -8,10 +8,17 @@ export default class FoodPlan {
 
     addRecipeToDay(index, recipe) {
         this.days[index] = recipe;
+        for (const recipe of this.days) {
+            if (recipe.img) {
+                console.log(recipe.img)
+                this.img = recipe.img;
+            }
+        }
     }
 
-    removeRecipeFromDay(day) {
-        day = {};
+    /*todo properly*/
+    removeRecipeFromDay(index) {
+        this.days[index] = {};
     }
 
     getHtml() {
@@ -42,8 +49,10 @@ export default class FoodPlan {
         for (const recipe of this.days) {
             let img = recipe.img != null ? recipe.img: "./img/gluten.png";
             let title = recipe.title != null ? recipe.title : "Ingen opskrift";
-            let button = recipe.title != null ? /*html*/`<button type="button" onclick="goToDetails(${recipe.id})">Se opskrift</button>`
-                                              : /*html*/`<button type="button" onclick="alert('add clicked')">Tilføj opskrift</button>`;
+            let button = recipe.title != null ? /*html*/`<button type="button" onclick="goToDetails(${recipe.id})">Se opskrift</button>
+                                                         <button type="button" onclick="removeRecipeFromDay(${this.id}, ${i})">Fjern</button>`
+                                              : /*html*/`<button type="button" onclick="goToSearch()">Søg</button>
+                                                         <button type="button" onclick="goToFavorites()">Tilføj fra favoritter</button>`;
 
             switch(i) {
                 case 0:

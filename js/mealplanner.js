@@ -85,6 +85,37 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
+    /*to do properly*/
+    showMenu(id, type) {
+        let container = this.domElement.querySelector(".click-menu");
+        let currentBox = this.domElement.querySelector(`#add-${id}`);
+        let x = currentBox.getBoundingClientRect().left;
+        let y = currentBox.getBoundingClientRect().top;
+        console.log(x.toString(), y);
+        container.innerHTML = /*html*/`
+            <div onclick="addToFoodPlan(${id}); hideMenu()">
+                <span class="material-icons">edit_calendar</span>Tilføj til madplan
+            </div>
+            <div>
+                <span class="material-icons">format_list_bulleted</span>Tilføj til indkøbsliste
+            </div>
+        `;
+        container.style.display = "block";
+        if (type == 1) {
+            container.style.left = `calc(${x}px - 180px)`;
+            container.style.top = `calc(${y}px + ${window.pageYOffset}px - 10px)`;
+        } else {
+            container.style.left = `calc(${x}px + 165px)`;
+            container.style.top = `calc(${y}px + ${window.pageYOffset}px + 100px)`;
+        }
+    }
+
+    /*to do properly*/
+    hideMenu() {
+        let container = this.domElement.querySelector(".click-menu");
+        container.style.display = "none";
+    }
+
 /* Search functionality */
     
     search(searchValue) {
@@ -144,6 +175,7 @@ export default class MealPlanner {
     foodPlanDetails(id) {
         const foodPlanToShow = this.user.foodPlans.find(foodPlan => foodPlan.id == id);
         document.querySelector("#food-plan-title").innerHTML = foodPlanToShow.title;
+        document.querySelector("#remove-food-plan").setAttribute("onclick", `javascript: removeFoodPlan(${id})`);
         document.querySelector("#food-plan-details").innerHTML = foodPlanToShow.getDetailHTML();
     }
     

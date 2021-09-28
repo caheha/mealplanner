@@ -294,7 +294,6 @@ article button {
     border-radius: 50px;
     color: var(--text-color-light);
     background-color: var(--green);
-    text-transform: uppercase;
 }
 
 .add-recipe input{
@@ -601,16 +600,17 @@ article button {
 }
 
 .food-plan .image-wrapper{
-    position: relative;
     width: calc(100% / 3);
+    background-color: var(--green);
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .food-plan .image-wrapper img {
-    padding-bottom: 5px;
-    background-color: var(--green);
+    width: 200%;
+    max-height: 130px;
 }
 
 .food-plan .text-wrapper {
@@ -619,7 +619,7 @@ article button {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
-    padding: 0.5em 1em 0 1em;
+    padding: 0.5em 1em;
 }
 
 .food-plan h2, .food-plan h3 {
@@ -641,4 +641,33 @@ article button {
 .food-plan button {
     margin-top: 0.2em;
     padding: 0.5em 1em;
+}
+
+/* -----------------------------------------------
+                   Click menu
+----------------------------------------------- */
+.click-menu {
+    background-color: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    z-index: 999;
+    display: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.click-menu span {
+    margin-right: 0.25em;
+}
+
+.click-menu div {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    border-bottom: 1px solid black;
+}
+
+.click-menu div:last-child {
+    border-bottom: none;
 }
