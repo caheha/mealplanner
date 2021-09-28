@@ -36,45 +36,143 @@
 
     </section>
 
-    <!-- Search recipes page -->
+    <!-- search recipes page -->
     <section id="opskrifter" class="page">
         <header class="header">
             <div class="searchbar">
                 <span class="material-icons">search</span>
                 <input type="search" placeholder="Søg efter opskrifter eller ingredienser" onkeyup="search(this.value)">
             </div>
+            <a class="nav-link right" href="#/opskrifter"><span class="material-icons">expand_more</span></a>
         </header>
         <section class="grid-container" id="recipes-container"></section>
     </section>
 
     <!-- opskriftsdetaljer page -->
     <section id="opskriftsdetaljer" class="page">
-        <header class="header">
-            <a class="nav-link" href="#/opskrifter"><span class="material-icons">chevron_left</span></a>
+        <header class="header text">
+            <a class="nav-link left" href="#/opskrifter"><span class="material-icons">chevron_left</span></a>
             <h2>Detaljer</h2>
         </header>
         <section class="grid-container" id="recipe-detail-container"></section>
         
     </section>
 
-    <!-- edir user page -->
+    <!-- favorites -->
     <section id="favoritter" class="page">
         <header class="header">
-            <h2>Favoritter</h2>
+            <div class="searchbar">
+                <span class="material-icons">search</span>
+                <input type="search" placeholder="Søg efter opskrifter eller ingredienser" onkeyup="searchFavorites(this.value)">
+            </div>
+            <a class="nav-link right" href="#/opretopskrift"><span class="material-icons">add</span></a>
         </header>
         <section class="grid-container" id="favorites-container"></section>
     </section>
 
-    <!-- edir user page -->
-    <section id="madplan" class="page">
-        <header class="header">
-            <h2>Madplan</h2>
+
+<!-- add new recipe -->
+    <section id="opretopskrift" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/favoritter"><span class="material-icons">chevron_left</span></a>
+            <h2>Opret opskrift</h2>
         </header>
+
+    <form class="add-recipe"> 
+        <h4>Titel</h4>
+        <!--Titel input-->
+        <input type="text" name="name" placeholder="Navn på opskrift" id="name" />
+        
+        <h4>Tilføj et billede af retten</h4>
+        <!--Billede input-->
+        <input type="text" name="img" placeholder="Image URL" id="img" />
+
+        <h4>Beskrivelse</h4>
+        <!--Beskrivelse input-->
+        <textarea class="add-decription" rows="6" name="description" form="usrform" id="description" placeholder="Indsæt beskrivelse af opskrift..."></textarea>
+
+        <h4>ingredienser</h4>
+        <!--Mængde, ingredienser & enhed input-->
+        <div class="add-ingredients">
+            <div>
+                <h5>Mængde</h5>
+                <input type="number" name="amount" placeholder="F.eks. 85" id="amount" />
+            </div>
+            <div>
+                <h5>Måleenhed</h5>
+                <input type="text" name="unit" placeholder="F.eks. dl" id="unit" />
+            </div>
+            <div>
+                <h5>ingredienser</h5>
+                <input type="text" name="ingredients" placeholder="F.eks. mælk" id="ingredients" />
+            </div>
+            <button onclick="addIngredient()">Tilføj</button>
+         </div>
+
+         <!--Fremgangsmåde input-->
+                         <h4>Fremgangsmåde</h4>
+
+         <div class="add-procedure">
+                <input type="text" name="procedure" placeholder="Tilføj step" id="procedure" />
+                <button onclick="addProcedure()">Tilføj</button>
+         </div>
+
+            <button class="submit" type="button" name="button" onclick="addRecipe()"> Tilføj opskrift </button>
+    </form>
     </section>
 
+<!-- food plan page -->
+    <section id="madplan" class="page">
+        <header class="header text">
+            <h2>Madplan</h2>
+            <a class="nav-link right" href="#/opretmadplan"><span class="material-icons">add</span></a>
+        </header>
+        <section class="grid-container" id="foodplans-container"></section>
+    </section>
+
+    <!-- add food plan page -->
+    <section id="opretmadplan" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/madplan"><span class="material-icons">chevron_left</span></a>
+            <h2>Opret madplan</h2>
+        </header>
+        <form>
+            <h4>Din madplan:</h4>
+            <input class="full" type="text" name="name" placeholder="f.eks. uge 23" id="foodplan-name">
+            <button class="submit" type="button" onclick="createFoodPlan()">Opret madplan</button>
+        </form>
+    </section>
+
+    <!-- food plan details page -->
+    <section id="madplandetaljer" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/madplan"><span class="material-icons">chevron_left</span></a>
+            <h2 id="food-plan-title">Madplan</h2>
+        </header>
+        <section class="grid-container" id="food-plan-details"></section>
+    </section>
+
+    <!-- pick food plan page -->
+    <section id="vælgmadplan" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/madplan"><span class="material-icons">chevron_left</span></a>
+            <h2>Vælg madplan</h2>
+        </header>
+        <section class="grid-container" id="pick-food-plan-container"></section>
+    </section>
+
+    <!-- pick food plan page -->
+    <section id="vælgdag" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/madplan"><span class="material-icons">chevron_left</span></a>
+            <h2>Vælg dag</h2>
+        </header>
+        <section class="grid-container" id="pick-day-container"></section>
+    </section>
+    
     <!-- edir user page -->
     <section id="indkøbsliste" class="page">
-        <header class="header">
+        <header class="header text">
             <h2>Indkøbsliste</h2>
         </header>
     </section>

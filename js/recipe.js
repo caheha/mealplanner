@@ -1,8 +1,8 @@
 let i = 0;
 
 export default class Recipe {
-    constructor(title, description, img, rating, time, price, country, gluten, vegetarian, 
-                vegan, sugar, dairy, season, theme, holiday, ingredients, procedure) {
+    constructor(title, description, img, rating, time, price, country, glutenfree, vegetarian, 
+                vegan, sugarfree, dairyfree, season, theme, holiday, ingredients, procedure) {
         this.id = i++;
         this.title = title;
         this.description = description;
@@ -13,11 +13,11 @@ export default class Recipe {
 
         this.country = country;
 
-        this.gluten = gluten;
+        this.glutenfree = glutenfree;
         this.vegetarian = vegetarian;
         this.vegan = vegan;
-        this.sugar = sugar;
-        this.dairy = dairy;
+        this.sugarfree = sugarfree;
+        this.dairyfree = dairyfree;
 
         this.season = season;
         this.theme = theme;
@@ -32,7 +32,7 @@ export default class Recipe {
         return /*html*/`
             <article class="recipe-container">
                 <div class="top">
-                    <div>${this.returnIconHTML(this.gluten, this.vegetarian, this.vegan, this.sugar, this.dairy)}</div>
+                    <div>${this.returnIconHTML(this.glutenfree, this.vegetarian, this.vegan, this.sugarfree, this.dairyfree)}</div>
                     <h2>${this.title}</h2>
                     <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                 </div>
@@ -48,17 +48,6 @@ export default class Recipe {
     }
 
     getDetailHTML() {
-        let ingredientsHTML = "";
-        for (const ingredient of this.ingredients) {
-            ingredientsHTML += /*html*/`
-                <tr>
-                    <td id="recipe-amount">${ingredient.amount}</td>
-                    <td>${ingredient.unit}</td>
-                    <td>${ingredient.name}</td>
-                </tr>
-                `;
-        }
-
         let procedureHTML = "";
         for (const procedure of this.procedure) {
             procedureHTML += `<li>${procedure}</li>`;
@@ -67,10 +56,10 @@ export default class Recipe {
         return /*html*/`
             <article class="recipe-details-container">
                 <div class="recipe-name">
-                    <h2>Spaghetti Carbonara</h2>
-                    <div class="icons" >${this.returnIconHTML(this.gluten, this.vegetarian, this.vegan, this.sugar, this.dairy)}</div>
+                    <h2>${this.title}</h2>
+                    <div class="icons" >${this.returnIconHTML(this.glutenfree, this.vegetarian, this.vegan, this.sugarfree, this.dairyfree)}</div>
                     <div>
-                        <span class="material-icons">add</span>
+                        <span class="material-icons" onclick="addToFoodPlan(${this.id})">add</span>
                         <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                      </div>
                 </div>
@@ -84,19 +73,21 @@ export default class Recipe {
                 <h3>Beskrivelse</h3>
                 <p>${this.description}</p>
 
-                <label for="sortBy">
-                    <select id="sortBy" onchange="multiplyAmount(this.value)">
-                        <option value="" selected disabled>Antal personer</option>
-                        <option value="1">1 personer</option>
-                        <option value="2">2 personer</option>
-                        <option value="3">3 personer</option>
-                        <option value="4">4 personer</option>
-                        <option value="5">5 personer</option>
-                    </select>
-                </label>
+                <div class="dropdown">
+                    <label for="sortBy">
+                        <select id="sortBy" onchange="multiplyAmount(${this.id}, this.value)">
+                            <option value="" selected disabled>Antal personer</option>
+                            <option value="1">1 personer</option>
+                            <option value="2">2 personer</option>
+                            <option value="3">3 personer</option>
+                            <option value="4">4 personer</option>
+                            <option value="5">5 personer</option>
+                        </select>
+                    </label>
+                </div>
                 
                 <h3>Ingredienser</h3>
-                <table>${ingredientsHTML}</table>
+                <table id="ingredients-table"></table>
                 
                 <h3>Fremgangsmåde</h3>
                 <ul>${procedureHTML}</ul>
@@ -104,16 +95,38 @@ export default class Recipe {
         `;
     }
 
+    returnIngredientsHTML(amount) {
+        let ingredientsHTML = "";
+        for (const ingredient of this.ingredients) {
+            if (ingredient.amount * amount == 0) {
+                ingredientsHTML += /*html*/`
+                <tr>
+                    <td>${ingredient.unit}</td>
+                    <td>${ingredient.name}</td>
+                </tr>
+                `;
+            } else {
+                ingredientsHTML += /*html*/`
+                <tr>
+                    <td>${ingredient.amount * amount} ${ingredient.unit}</td>
+                    <td>${ingredient.name}</td>
+                </tr>
+                `;
+            }
+        }
+        return ingredientsHTML;
+    }
+
     // Returnerer HTML med ikoner til opskriften, hvis de enkelte properties er true
-    returnIconHTML(gluten, vegetarian, vegan, sugar, dairy) {
+    returnIconHTML(glutenfree, vegetarian, vegan, sugarfree, dairyfree) {
         let html = "";
 
         /* Tilføj billedikoner */
-        if (gluten) { html += `<img src="../img/gluten.png">` }
+        if (glutenfree) { html += `<img src="../img/gluten.png">` }
         if (vegetarian) { html += `<img src="../img/vegetarian.png">` }
         if (vegan) { html += `<img src="../img/vegan.png">` }
-        if (sugar) { html += `<img src="../img/sugar.png">` }
-        if (dairy) { html += `<img src="../img/dairy.png">` }
+        if (sugarfree) { html += `<img src="../img/sugar.png">` }
+        if (dairyfree) { html += `<img src="../img/dairy.png">` }
         
         return html;
     }

@@ -1,70 +1,266 @@
-[{
+[
+
+{
     "title": "Spaghetti Carbonara",
-    "description": "Et klassisk pastaret fra Italien.",
-    "img": "https://mummum.dk/wp-content/uploads/2020/05/P1160155.jpg",
-    "rating": 2,
-    "time": 20,
+    "description": "Pasta Carbonara er en af de retter, som vi indimellem tyer til på travle hverdage og enkelte weekend aftener. De dage, hvor behovet for en nem, lynhurtig og superlækker ret vægtes meget højere, end lang tid i køkkenet og langsommelige, men hyggelige simreretter – hvilket jeg også holder rigtig meget af, men hver ting til sin tid … og sådan en helt enkel Spaghetti Carbonara er evig godt.<br><br>Da Spaghetti Carbonara er en af de retter, hvor kvaliteten topper på få ingredienser, så er det godt at bruge en bacon af rigtig god kvalitet og med god smag. Det gør en stor forskel i retten.",
+    "img": "https://www.valdemarsro.dk/wp-content/2016/10/carbonara_app-1300.jpg",
+    "rating": 4,
+    "time": 15,
     "price": "Middel",
 
     "country": "italien",
     
-    "gluten": true,
-    "vegetarian": true,
-    "vegan": true,
-    "sugar": true,
-    "dairy": true,
+    "glutenfree": false,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
 
-    "season": "",
-    "theme": "",
-    "holiday": "",
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Pasta, Bacon",
+    "holiday": null,
 
+    "ingredients": [ {"name": "bacon", "amount": 25, "unit": "g"}, {"name": "smør", "amount": 0.25, "unit": "tsk"}, {"name": "løg", "amount": 0.25, "unit": "stk"}, {"name": "piskefløde", "amount": 0.25, "unit": "dl"}, {"name": "æg", "amount": 0.5, "unit": "stk"}, {"name": "paremsan", "amount": 12, "unit": "g"}, {"name": "spaghetti", "amount": 62.5, "unit": "g"} ],
+    "procedure": ["Kog pastaen, til den er perfekt mør med bid.", "Steg bacon på en pande ved middelhøj varme, til det er sprødt og stadig saftigt.", "Kom bacon på en tallerken med fedtsugende papir.", "Kom smør på panden med baconfedt og sauter løgene, til er bløde og klare.", "Tilsæt bacon og fløde.", " Lad fløden bruse kort op.", "Tag panden af varmen og rør æg i samt den kogte pasta, og bland retten godt sammen med den friskrevne ost.", "Smag til med salt og friskkværnet peber."]
+}
 
-    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
-    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
-},{
-    "title": "Salat med varmrøget laks",
-    "description": "Et klassisk pastaret fra Italien.",
-    "img": "https://mummum.dk/wp-content/uploads/2021/09/IMG_7221-min-1536x1132.jpg",
-    "rating": 4,
+,
+
+{
+    "title": "Salat med bagt laks og stenbiderrogn",
+    "description": "Enkel og virkelig velsmagende salat med bagt laks og stenbiderrogn, som vi har spist indtil flere gange den seneste måned og nu hvor vejret endelig viser sig fra sin milde solrige side, så er det altså et ekstra stort hit.<br><br>Forårsvejr i kombination med forårssprøde retter – det er en ren hjertevarmer. I stedet for bagt laks, kan man fx bruge en mild varmrøget laks – hvilket også er rigtig lækkert. Martin er begyndt at varmrøge vores laks selv og det er virkelig en smagsoplevelse, som giver en mildere røgsmag til et godt stykke laks.",
+    "img": "https://www.valdemarsro.dk/wp-content/2018/04/salat-laks-stenbiderrogn.jpg",
+    "rating": 5,
     "time": 20,
+    "price": "Middel",
+
+    "country": "Danmark",
+    
+    "glutenfree": true,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Forår",
+    "theme": "Salat, Fisk",
+    "holiday": null,
+
+    "ingredients": [ {"name": "blandet salat", "amount": 37.5, "unit": "g"}, {"name": "laksefilet", "amount": 75, "unit": "g"}, {"name": "dild, tørret", "amount": 0.25, "unit": "tsk"}, {"name": "øko citron", "amount": 0.25, "unit": "stk"}, {"name": "stenbiderrogn, frisk", "amount": 12, "unit": "g"}, {"name": "rødløg, i tynde skiver", "amount": 0.25, "unit": "stk"}, {"name": "frisk dild", "amount": 0.25, "unit": "håndfuld"}, {"name": "flagesalt", "amount": 0, "unit": ""}, {"name": "sort peber, friskkværnet", "amount": 0, "unit": ""}, {"name": "cremefraiche 38%", "amount": 0.25, "unit": "dl"}],
+    "procedure": ["Drys laksen med salt, peber og dild, læg to citronskiver over og bag laksen i et ovnfast fad i en forvarmet ovn ved 175 grader varmluft i 15 minutter eller til den er lige akkurat perfekt tilberedt.", "Anret salaten på tallerkener.", "Fordel stykker af den bagte laks på salaten sammen med små skefulde stenbiderrogn, rødløg i skiver, frisk dild og små skefulde dressing.", "Server med et par citronbåde til, så man selv kan dryppe over og smage til."]
+}
+
+,
+
+{
+    "title": "Panang karry med kylling",
+    "description": "Panang Karry med kylling er en rigtig klassiker fra det thailandske køkken og en skøn en af slagsen.<br><br>Min opskrift på den skønne ret er tilrettet lidt til vores danske køkken og til de råvarer vi har i sæson og tilgængeligt. Sådan oplever jeg at resultatet bliver bedst, når man lader sig inspirere af klodens mange skønne køkkener – ved ikke at lave opskriften 1:1, men at tilpasse med de bedste råvarer man har tilgængelig i sin egen baghave, så at sige. Panang Karry er virkelig en lækkerbisken, mørt kyllingekød, masser af grøntsager og masser smag og sprødhed.",
+    "img": "https://www.valdemarsro.dk/wp-content/2020/01/penang-kylling.jpg",
+    "rating": 4,
+    "time": 35,
+    "price": "Lav",
+
+    "country": "Thailandsk",
+    
+    "glutenfree": true,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": true,
+
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Ris, Karry, Kylling",
+    "holiday": null,
+
+    "ingredients": [ {"name": "løg, finthakket", "amount": 0.5, "unit": "stk"}, {"name": "fed hvidløg, finthakket", "amount": 1, "unit": "spsk"}, {"name": "kyllingefillet, i strimler", "amount": 75, "unit": "g"}, {"name": "ingefær, friskrevet", "amount": 5, "unit": "g"}, {"name": "gulerod, skåret i tynde strimler", "amount": 1, "unit": "stk"}, {"name": "broccoli, i buketter", "amount": 50, "unit": "g"}, {"name": "edamamebønner", "amount": 25, "unit": "g"}, {"name": "kokosmælk", "amount": 0.25, "unit": "dåse"}, {"name": "gul peberfrugt", "amount": 0.50, "unit": "stk"}, {"name": "peanutbutter", "amount": 0.25, "unit": "spsk"}, {"name": "kokossukker", "amount": 0.25, "unit": "tsk"}, {"name": "soja", "amount": 0.25, "unit": "spsk"}, {"name": "øko lime", "amount": 0.25, "unit": "stk"}, {"name": "olivenolie", "amount": 0.25, "unit": "spsk"}, {"name": "ris, bamati eller brune", "amount": 0.75, "unit": "dl"}, {"name": "saltede peantus", "amount": 0.25, "unit": "dl"}, {"name": "frisk koriander", "amount": 0.25, "unit": "håndfuld"}],
+    "procedure": ["Kog risene efter anvisning på emballagen.", "Kom kylling og olie i en pande, wok eller gryde og brun kødet af på alle sider.", " Tilsæt derefter løg, hvidløg, ingefær og karrypasta og sauter ved middelvarme, til løgene er bløde og klare.", "Tilsæt gulerødder, broccoli, edamamebønner og kokosmælk til retten og lad retten simre under låg i 15 minutter.", "Tilsæt peberfrugt og peanutbutter og smag til med kokosukker, soyasauce, fintrevet limeskal og saft.", "Server med ris, frisk koriander og peanuts."]
+}
+
+,
+
+{
+    "title": "Laks med sesam og citron",
+    "description": "Laks med sesam panering, frisk citron og et grønt drys dild er en virkelig dejlig måde at spise de skønne laksefiletter på.<br><br>Vi spiser gerne laksefilet til aftensmad et par gange om måneden – det er bare sådan et stykke taknemmeligt fisk at tilberede, som altid bliver virkelig lækkert. Sesampanering er super nemt at lave og giver en sprød skorpe, som også børnene er meget begejstret for.<br><br>Inde bag den sprøde skorpe er laksen mør og saftig og helt perfekt tilberedt.",
+    "img": "https://www.valdemarsro.dk/wp-content/2017/08/laks-sesam-.jpg",
+    "rating": 5,
+    "time": 20,
+    "price": "Middel",
+
+    "country": "Danmark",
+    
+    "glutenfree": true,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Fisk",
+    "holiday": null,
+
+    "ingredients": [ {"name": "laksefillet", "amount": 1, "unit": "stk"}, {"name": "sesamfrø", "amount": 1, "unit": "spsk"}, {"name": "øko citron", "amount": 0.25, "unit": "stk"}, {"name": "salt", "amount": 0, "unit": ""}, {"name": "sort peber, friskkværnet", "amount": 0, "unit": ""}, {"name": "smør, til stegning", "amount": 0.25, "unit": "tsk"}, {"name": "olivenolie", "amount": 0.25, "unit": "tsk"}, {"name": "frisk dild", "amount": 0.25, "unit": "håndfuld"}],
+    "procedure": ["Bland sesamfrø, revet citronskal, salt og peber sammen.", "Læg oversiden af laksefileterne i sesamblandingen.", "Varm smør og olie op på en pande og steg laksefileterne på skindsiden ved middelvarme i ca. 15 minutter på skindsiden og afslut med ca. 3-4 minutter på den anden side.", "Hold øje med dem, da stegetiden afhænger af størrelsen på laksefileterne."]
+}
+
+,
+
+{
+    "title": "Risengrød",
+    "description": "Risengrød er et rigtig stjernehit her i juletiden – og derudover er det jo virkelig både billig, hurtig og nem aftensmad. Hjemmelavet risengrød er perfekt til de dage, hvor er der lidt juletravlhed eller hvor vi hellere vil bruge tid med et hyggeligt brætspil herhjemme.<br><br>En helt fast del af vores decembermåned – men risengrød er også dejlig indimellem resten af året – og så smager det stjernelækkert med smørklat, kanelsukker og rød saft eller nisseøl til.<br><br>Her får du min opskrift på den gode julegrød både tilberedt på komfur og på risengrød i ovn",
+    "img": "https://www.valdemarsro.dk/wp-content/2010/10/risengroed-1.jpg",
+    "rating": 5,
+    "time": 60,
+    "price": "Lav",
+
+    "country": "Danmark",
+    
+    "glutenfree": true,
+    "vegetarian": true,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Efterår, Vinter",
+    "theme": "Jul, Grød",
+    "holiday": "Jul",
+
+    "ingredients": [ {"name": "grødris", "amount": 1.50, "unit": "dl"}, {"name": "vand", "amount": 0.25, "unit": "dl"}, {"name": "mælk", "amount": 0.5, "unit": "l"}, {"name": "salt", "amount": 0.25, "unit": "tsk"}, {"name": "kanel", "amount": 1, "unit": "tsk"}, {"name": "sukker", "amount": 1, "unit": "tsk"}, {"name": "smør", "amount": 1, "unit": "tsk"} ],
+    "procedure": ["Skyl grødris i koldt vand og kom dem i en gryde med 1 dl vand.", "Ko op under omrøring. Hæld 2 liter mælk i gryden til grødrisene, når vandet er fordampet og rør det godt igennem nogle minutter, mens det varmes op til knap kogepunktet.", "Skrue ned til lav varme og rør videre i et minuts tid. Læg låg på gryden og lad den stå på lav varme. Rør i gryden ca. hver 10 minut til risene er møre og grøden er lækker.", "Kom en smule salt i og server den varme risengrød med smørklat og kanel."]
+}
+
+,
+
+{
+    "title": "Kyllingeburger",
+    "description": "Denne kyllingeburger ser måske ikke ud af så meget … Men her skal man bestemt ikke dømme på udseendet, for det er faktisk muligvis den bedste kyllingeburger, som jeg nogensinde har smagt.<br><br>Saftig med super meget juicy smag og bare helt stjernelækker i al sin enkelhed.",
+    "img": "https://www.valdemarsro.dk/wp-content/2012/11/kyllingeburger-opskrift.jpg",
+    "rating": 4,
+    "time": 45,
+    "price": "Middel",
+
+    "country": "Danmark",
+    
+    "glutenfree": false,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Forår, Sommer, EFterår, Vinter",
+    "theme": "Burger",
+    "holiday": null,
+
+
+    "ingredients": [ {"name": "hakket kylling", "amount": 125, "unit": "g"}, {"name": "fed hvidløg, presset", "amount": 0.25, "unit": "stk"}, {"name": "æble, groftrevet", "amount": 0.25, "unit": "stk"}, {"name": "æg", "amount": 0.25, "unit": "stk"}, {"name": "øko citron, saft", "amount": 0.2, "unit": "stk"}, {"name": "bredbladet persille", "amount": 0.25, "unit": "hånfuld"}, {"name": "mango chutney", "amount": 0.25, "unit": "spsk"}, {"name": "cayenne peber", "amount": 0.25, "unit": "knivspids"}, {"name": "frisk dild, frinthakket", "amount": 0.25, "unit": "håndfuld"}, {"name": "flagesalt", "amount": 0, "unit": ""}, {"name": "smør, til stegning", "amount": 0.25, "unit": "spsk"}, {"name": "olivenolie, til stegning", "amount": 0.25, "unit": "spsk"}, {"name": "burgerbolle", "amount": 1, "unit": "stk"}, {"name": "grønt salat", "amount": 30, "unit": "g"}, {"name": "agurk", "amount": 0.2, "unit": "stk"}, {"name": "mango", "amount": 0.2, "unit": "stk"}],
+    "procedure": ["Kom det hakkede kyllingekød i en skål sammen med de andre ingredienser og rør det godt sammen.", "Lad farsen hvile i køleskabet i en halv times tid.", "Form kyllingebøfferne og steg dem på en pande med smør og olie ved middelvarme.", "Smør bollerne med dressing og saml kyllingeburgerne med fyldet."]
+}
+
+,
+
+{
+    "title": "Mexicansk Lasagne",
+    "description": "Mexicansk lasagne er en skøn og lidt anderledes måde at spise en ret inspireret af det dejlige tex mex køkken – for det er nu nok næppe en lasagne de lokale spiser i Mexico … trods alt. Opskriften skal mere betragtes som en fusion mellem det italienske og mexicanske køkken, som smager herligt og er en skøn måde at variere såvel lasagne, som de mere traditionelle tex mex retter. <br> <br> Jeg bruger lasagneplader, men man kan fint bruge nachos eller tortillas som fyld i mexicansk lasagne. Det smager alt sammen godt og styrken kan også snildt justeres til, både i selve retten eller ved at sætte skåle med jalapenos og tabascosauce på bordet, så alle smagsløg tilgodeses.",
+    "img": "https://www.valdemarsro.dk/wp-content/2017/10/mexilasagne.jpg",
+    "rating": 3,
+    "time": 20,
+    "price": "Middel",
+
+    "country": "Mexicansk",
+    
+    "glutenfree": false,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Mexicansk, Lasagne, Spicy",
+    "holiday": null,
+
+
+    "ingredients": [ {"name": "stødt spidskommen", "amount": 0.33, "unit": "tsk"}, {"name": "chiliflage", "amount": 0.33, "unit": "tsk"}, {"name": "stødt koriander", "amount": 0.17, "unit": ""}, {"name": "sød paprika", "amount": 0.17, "unit": "tsk"}, {"name": "cayennepeber", "amount": 0.17, "unit": "knivspids"}, {"name": "løg", "amount": 0.33, "unit": "hakkede"}, {"name": "hvidløg", "amount": 1, "unit": "fed"}, {"name": "olivenolie", "amount": 0.33, "unit": "spsk"}, {"name": "hakket oksekød", "amount": 67, "unit": "g"}, {"name": "tørret oregano", "amount": 0.33, "unit": "tsk"}, {"name": "groftrevet bladselleri", "amount": 1, "unit": "stængler"}, {"name": "squash", "amount": 0.17, "unit": "groft"}, {"name": "tomatpure", "amount": 0.17, "unit": "dl"}, {"name": "hakkede tomater", "amount": 0.33, "unit": "dåser"}, {"name": "salt", "amount": 0, "unit": " "}, {"name": "sort peber", "amount": 1, "unit": "friskkværnet"}, {"name": "grøntsagsbouillon", "amount": 0.33, "unit": "dl"}, {"name": "majs", "amount": 25, "unit": "g"}, {"name": "rød peberfrugt", "amount": 0.17, "unit": "tern"}, {"name": "finthakket jalapenos", "amount": 0.17, "unit": "spsk"}, {"name": "lasagneplader", "amount": 20, "unit": "g"}, {"name": "friskrevet cheddar ost", "amount": 25, "unit": "g"}, {"name": "jalapenos", "amount": 0.50, "unit": "spsk"}, {"name": "avocado", "amount": 0.50, "unit": ""}, {"name": "lime", "amount": 0.17, "unit": ""}, {"name": "nachos", "amount": 20, "unit": "g"} ],
+    "procedure": ["Varm en tør gryde op med spidskommen, chiliflager, koriander, sød paprika, røget paprika, samt evt. cayennepeber og varm igennem under omrøring til krydderierne dufter skønt.", "Skrue ned for varmen og kom derefter løg, hvidløg og olivenolie i gryden og sauter løgene ved middel varme, til de er bløde og gennemsigtige.", "Tilsæt kødet og brun det godt ved høj varme. Derefter skrues ned for varmen og oregano/timian, bladselleri, squash, tomatpure, hakkede tomater, salt og peber tilsættes.", "Lad saucen simre i mindst 1 time med låg på. Tilføj lidt vand eller grøntsagsboullion, hvis det føles nødvendigt.", "Smag saucen til, evt. med mere salt, peber, chili eller tomatpure efter smag. Tilsæt kidneybønner. <br> Saml den mexicanske lasagne i et smurt ovnfast fad, med skiftevis lasagnesauce, lasagneplader, grøntsagsfyld og friskrevet cheddar ost.", "Afslut med cheddar ost, evt lidt knuste nachos og lidt jalapenos og bag i en forvarmet ovn ved 175 grader varmluft i 20 minutter, eller til lasagnepladerne er møre.", "Serveres med friskrevet cheddar, nachos, avocado, lime og jalapenos."]
+}
+
+,
+
+{
+    "title": "One pot pasta",
+    "description": "One pot pasta kan laves på adskillige måder og er ganske simpelt den perfekte hverdagsredning til en stjerneskøn aftensmad, som smager helt og aldeles fantastisk. <br> <br> Når man i denne tilberedningsmetode kommer alt i en gryde på en og samme tid, så sker der nemlig det magiske at alle ingredienserne tager smag fra hinanden og pastaen, som ellers traditionelt koges for sig selv og først derefter blandes med saucen, bliver helt ekstraordinær lækker og smovset. <br> <br> Det smager ganske enkelt bare vildt godt!",
+    "img": "https://www.valdemarsro.dk/wp-content/2017/03/one-pot-pasta-3.jpg",
+    "rating": 5,
+    "time": 25,
     "price": "Lav",
 
     "country": "italien",
     
-    "gluten": true,
-    "vegetarian": true,
+    "glutenfree": false,
+    "vegetarian": false,
     "vegan": false,
-    "sugar": false,
-    "dairy": true,
+    "sugarfree": false,
+    "dairyfree": false,
 
-    "season": "",
-    "theme": "",
-    "holiday": "",
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Pasta",
+    "holiday": null,
 
 
-    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
-    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
-},{
+    "ingredients": [ {"name": "spaghetti", "amount": 100, "unit": "g"}, {"name": "hakkede tomater", "amount": 0.25, "unit": "dåse"}, {"name": "frisk basilikum, bladene herfra", "amount": 0.25, "unit": "håndfuld"}, {"name": "løg", "amount": 0.25, "unit": "finthakket"}, {"name": "hvidløg, finthakket", "amount": 0.50, "unit": "fed"}, {"name": "cherrytomater", "amount": 5, "unit": "stk"}, {"name": "squash, groftrevet", "amount": 0.13, "unit": "stk"}, {"name": "tørret oregano", "amount": 0.25, "unit": "tsk"}, {"name": "finthakket chorizo", "amount": 13, "unit": "g"}, {"name": "grøntsagsboullion", "amount": 1.25, "unit": "dl"}, {"name": "olivenolie", "amount": 0.25, "unit": "spsk"}, {"name": "chiliflager", "amount": 0.25, "unit": "tsk"}, {"name": "salt", "amount": 0.25, "unit": "tsk"}, {"name": "sort peber, friskkværnet", "amount": 0, "unit": " "}, {"name": "parmesan, til servering", "amount": 13, "unit": "g"}, {"name": "frisk basilikum, blade", "amount": 0.25, "unit": "håndfuld"}],
+    "procedure": ["Helt enkelt som navnet antyder, så kom alle ingredienserne i en stor gryde på én gang.", "Kog retten op, rør godt rundt i gryden og skru ned for varmen.", "Lad det simrekoge under låg i 10-12 minutter, til spaghettien er perfekt kogt – al dente med lidt bid i.", "Server med revet parmesan og basilikum."]
+}
+
+,
+
+{
+    "title": "Cæsarsalat",
+    "description": "Denne skønne cæsarsalat er en af mine favoritsalater! <br> <br> Helt enkel og smager virkelig godt. Jeg kan allerbedst lide cæsarsalat, når jeg laver den med et godt stykke kyllingebryst med skind – det smager virkelig bare ekstra fantastisk! <br> <br> Men cæsar salat kan også fint laves med en rest kylling fra fx en helstegt kylling eller kylling i rømertopf og er dermed den perfekte luksus 'restemad'.",
+    "img": "https://www.valdemarsro.dk/wp-content/2017/03/ceasarsalat.jpg",
+    "rating": 4,
+    "time": 40,
+    "price": "Lav",
+
+    "country": "Græsk",
+    
+    "glutenfree": false,
+    "vegetarian": false,
+    "vegan": false,
+    "sugarfree": false,
+    "dairyfree": false,
+
+    "season": "Sommer, Efterår",
+    "theme": "Salat",
+    "holiday": null,
+
+
+    "ingredients": [ {"name": "kyllingebryst med skind", "amount": 1, "unit": "stk"}, {"name": "romainsalat, plukket i grove stykker", "amount": 0.50, "unit": "stk"}, {"name": "parmesan, i flager eller groftrevet", "amount": 13, "unit": "g"}, {"name": "smør, til stegning", "amount": 0.25, "unit": "tsk"}, {"name": "olivenolie, til stegning", "amount": 0.25, "unit": "tsk"}, {"name": "brød, fx grydebrød", "amount": 0.50, "unit": "skiver"}, {"name": "smør", "amount": 0.25, "unit": "tsk"}, {"name": "mayonnaise", "amount": 0.25, "unit": "dl"}, {"name": "ansjosfileter i olie", "amount": 0.25, "unit": "stk"}, {"name": "worcestershire sauce", "amount": 0.25, "unit": "tsk"}, {"name": "parmesan, friskrevet", "amount": 8, "unit": "g"}, {"name": "hvidløg, presset", "amount": 1, "unit": "fed"}, {"name": "lidt citronsaft herfra", "amount": 0.50, "unit": "citron"}, {"name": "salt", "amount": 0, "unit": " "}, {"name": "sort peber, friskkværnet", "amount": 0, "unit": " "}],
+    "procedure": ["Rids skindsiden af kyllingebrysterne med en skarp kniv og drys med salt og peber. Kom smør og olie på en kold pande og læg kyllingebrysterne på panden med skind­ siden ned. Lad kyllingebrysterne stege langsomt ved middelvarme i 20 minutter på skindsiden. Gør imens dressing, croutoner og salaten klar.", "Vend kyllingebrysterne, skru lidt op for varmen og steg dem i cirka 4­-5 minutter på den anden side.", "Pluk salaten og fordel den på fire tallerkener. Skær kyllingebrysterne i skiver, anret dem på tallerkener og kom til sidst dres­sing, parmesan og croutoner ovenpå.", "CÆSARDRESSING - Blend ingredienserne til dressingen og smag til med citronsaft, salt og peber.", "CROUTONER - Smør brødskiverne med smør på begge sider og rist dem på en pande. Skær i tern"]
+}
+
+,
+
+{
     "title": "Vegetar bolognese",
-    "description": "Et klassisk pastaret fra Italien.",
-    "img": "https://mummum.dk/wp-content/uploads/2020/01/vegetarisk-bolognese-1350x1093.jpg",
-    "rating": 4,
-    "time": 20,
-    "price": "Lav",
+    "description": "Denne vegetar bolognese er en herlig ret, som er virkelig nem at lave hvis man finder minihakkeren eller foodprocessoren frem til svampe og grøntsager. <br> <br> Hvis det lyder lidt spøjst med finthakkede svampe, eller nogen i familien slet ikke kan med champignon – så vil jeg alligevel varmt anbefale at teste opskriften af. Finthakkede champignon giver nemlig den lækreste fylde, konsistens og fornemmelse af kød i retten – jeg har serveret den for min familie og der blev spist op med største fornøjelse, og ingen lagde mærke til fraværet af kød eller til tilstedeværelsen af champignon.",
+    "img": "https://www.valdemarsro.dk/wp-content/2019/02/vegetar-bolognese-opskrift.jpg",
+    "rating": 3,
+    "time": 30,
+    "price": "Middel",
 
     "country": "italien",
     
-    "gluten": true,
+    "glutenfree": false,
     "vegetarian": true,
     "vegan": false,
-    "sugar": false,
-    "dairy": true,
+    "sugarfree": false,
+    "dairyfree": false,
 
-    "season": "",
-    "theme": "",
-    "holiday": "",
+    "season": "Forår, Sommer, Efterår, Vinter",
+    "theme": "Pasta Vegetar",
+    "holiday": null,
 
 
-    "ingredients": [ {"name": "Kartofler", "amount": 4, "unit": "kg"}, {"name": "Guleroder", "amount": 2, "unit": "spsk"}],
-    "procedure": ["Sæt vandet i kog", "Hæld pasta i gryden"]
-}]
+    "ingredients": [ {"name": "løg", "amount": 0.25, "unit": "stk"}, {"name": "Hvidløg", "amount": 0.5, "unit": "fede"}, {"name": "champignon", "amount": 62.5, "unit": "g"}, {"name": "timian", "amount": 0.50, "unit": "tsk"}, {"name": "paprika", "amount": 0.50, "unit": "tsk"}, {"name": "squash", "amount": 0.50, "unit": "stk"}, {"name": "bladselleri", "amount": 1, "unit": "stængler"}, {"name": "soltørrede tomater", "amount": 20, "unit": "g"}, {"name": "hakkede tomater", "amount": 0.50, "unit": "dåse"}, {"name": "rød balsamico", "amount": 0.50, "unit": "spsk"}, {"name": "røde linser", "amount": 15, "unit": "g"}, {"name": "rød eller grøntsagsboullion", "amount": 0.25, "unit": "dl"}, {"name": "rosmarin", "amount": 0.25, "unit": "spsk"}, {"name": "salt", "amount": 0, "unit": ""}],
+    "procedure": ["Sauter løg og hvidløg i en gryde med olie, til de er klare og bløde.", "Skru op for varmen og kom finthakkede champignoner i gryden, rør godt igennem og tilsæt derefter de andre ingredienser.", "Skru ned for varmen og lad retten simre i 20 minutter, til linserne er møre.", "Smag saucen til med salt og frisk­kværnet peber. Server med dampende varm spaghetti, friskrevet parmesan og timian."]
+}
+
+]
