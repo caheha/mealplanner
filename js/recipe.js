@@ -63,7 +63,7 @@ export default class Recipe {
                         <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                      </div>
                 </div>
-                <div class="image-wrapper" onclick="goToDetails(${this.id})"><img src="${this.img}" alt="${this.title}"></div>
+                <div class="image-wrapper"><img src="${this.img}" alt="${this.title}"></div>
                 <div class="bottom">
                     <p>${this.returnStarsHTML(this.rating)}</p>
                     <p><span class="material-icons">schedule</span>${this.time} min</p>

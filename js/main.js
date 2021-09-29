@@ -1,11 +1,6 @@
 import MealPlanner from "./mealplanner.js";
 import Router from "./router.js";
 import User from "./user.js";
-import FoodPlan from "./foodPlan.js";
-import Recipe from "./recipe.js";
-
-let ingredients = [];
-let procedures = [];
 
 const app = document.querySelector("#app");
 
@@ -16,11 +11,8 @@ const user = new User();
 const mealplanner = new MealPlanner(app, user);
 
 window.favorite = (id) => {
-    if (!user.favorites.find(recipe => recipe.id == id)) {
-        user.addFavorite(mealplanner.allRecipes.find(recipe => recipe.id == id));
-    } else {
-        user.removeFavorite(user.favorites.find(recipe => recipe.id == id));
-    }
+    mealplanner.favorite(id);
+    // update dom
     mealplanner.appendFavorites(user.favorites, user.myRecipes);
 }
 
@@ -33,13 +25,13 @@ window.hideMenu = () => {
     mealplanner.hideMenu();
 }
 
-//mealplanner.appendFavorites();
-
+// Called when search field for all recipes is used
 window.search = (searchValue) => {
     mealplanner.search(searchValue);
     mealplanner.appendFavorites(user.favorites, user.myRecipes);
 }
 
+// Called when search field for favorite recipes is used
 window.searchFavorites = (searchValue) => {
     mealplanner.searchFavorites(searchValue);
 }
@@ -77,75 +69,16 @@ window.goToAddRecipe = () => {
 /* ------ Add ingredients, procedure & save recipe ------ */
 
 window.addIngredient = () => {
-    let inputAmount = document.querySelector("#input-amount");
-    let inputUnit = document.querySelector("#input-unit");
-    let inputIngredient = document.querySelector("#input-ingredients");
-
-    // Update array
-    let newIngredient = {
-        amount: inputAmount.value,
-        unit: inputUnit.value,
-        name: inputIngredient.value
-    }
-
-    ingredients.push(newIngredient);
-
-    // Reset input fields
-    inputAmount.value = "";
-    inputUnit.value = "";
-    inputIngredient.value = "";
-
-    // Append ingredient
-    let table = document.querySelector("#ingredients-input");
-
-    let html = "";
-
-    for (const ingredient of ingredients) {                        
-        html += `
-            <tr>
-                <td>${ingredient.amount} ${ingredient.unit}</td>
-                <td>${ingredient.name}</td>
-            </tr>
-        `;
-    }
-            
-    table.innerHTML = html;
+    mealplanner.addIngredient();
 }
     
 
 window.addProcedure = () => {
-    // Get input
-    let inputProcedure = document.querySelector("#input-procedure");
-
-    // Update array
-    procedures.push(inputProcedure.value);
-
-    // Reset input
-    inputProcedure.value = "";
-
-    // Append procedure
-     let liste = document.querySelector("#procedure-input");
-
-    let html = "";
-
-    for (const procedure of procedures) {                        
-        html += `
-            <li>
-            ${procedure}
-            </li>
-        `;
-    }
-            
-    liste.innerHTML = html;
-
+    mealplanner.addProcedure();
 }
 
 window.saveRecipe = () => {
-    user.addRecipe(ingredients, procedures)
-    ingredients = [];
-    procedures = [];
-
-    mealplanner.appendFavorites(user.favorites, user.myRecipes);
+    mealplanner.saveRecipe();
     router.navigateTo("#/favoritter");   
 }
 
@@ -154,10 +87,7 @@ window.saveRecipe = () => {
 /* ------  ------ */
 
 window.createFoodPlan = () => {
-    let nameContainer = document.querySelector("#foodplan-name");
-    user.addFoodPlan(new FoodPlan(nameContainer.value));
-    nameContainer.value = "";
-
+    mealplanner.createFoodPlan();
     mealplanner.appendFoodPlans();
     router.navigateTo("#/madplan");
 }
@@ -166,7 +96,6 @@ window.removeFoodPlan = (id) => {
     user.removeFoodPlan(id);
     mealplanner.appendFoodPlans();
     router.navigateTo("#/madplan");
-    console.log("test");
 }
 
 window.goToFoodPlanDetails = (id) => {
@@ -175,146 +104,55 @@ window.goToFoodPlanDetails = (id) => {
 }
 
 window.addToFoodPlan = (id) => {
-    let container = document.querySelector("#pick-food-plan-container");
-    container.innerHTML = "";
-    for (const foodPlan of user.foodPlans) {
-        container.innerHTML = foodPlan.getPickHtml(id) + container.innerHTML;
-    }
+    mealplanner.addToFoodPlan(id);
     router.navigateTo("#/vælgmadplan");
 }
 
 window.chooseFoodPlan = (foodPlanId, recipeId) => {
-    let foodPlan = user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-    let container = document.querySelector("#pick-day-container");
-    let html = "";
-    let i = 0;
-    let day = "Mandag";
-
-    for (const recipe of foodPlan.days) {
-        switch(i) {
-            case 0:
-                day = "Mandag";
-                break;
-            case 1:
-                day = "Tirsdag";
-                break;
-            case 2:
-                day = "Onsdag";
-                break;
-            case 3:
-                day = "Torsdag";
-                break;
-            case 4:
-                day = "Fredag";
-                break;
-            case 5:
-                day = "Lørdag";
-                break;
-            case 6:
-                day = "Søndag";
-                break;
-            default:
-                day = "Mandag";
-                break;
-        }
-
-        let img = recipe.img != null ? recipe.img: "./img/" + day.toString().toLowerCase() + ".png";
-
-        if (recipe.id != undefined) {
-            html += /*html*/`
-                <article class="food-plan">
-                    <div class="image-wrapper">
-                        <img src="${recipe.img}">
-                    </div>
-                    <div class="text-wrapper">
-                        <div>
-                            <h2>${day}</h2>
-                            <h3>${recipe.title}</h3>
-                        </div>
-                        <button type="button" onclick="chooseDay(${i}, ${foodPlanId}, ${recipeId})">Erstat opskrift</button>
-                    </div>
-                </article>
-            `;
-        } else {
-            html += /*html*/`
-                <article class="food-plan">
-                    <div class="image-wrapper">
-                        <img src="${img}">
-                    </div>
-                    <div class="text-wrapper">
-                        <div>
-                            <h2>${day}</h2>
-                            <h3>Ingen opskrift</h3>
-                        </div>
-                        <button type="button" onclick="chooseDay(${i}, ${foodPlanId}, ${recipeId})">Tilføj opskrift</button>
-                    </div>
-                </article>
-            `;
-        }
-        i++;
-    }
-
-    container.innerHTML = html;
+    mealplanner.chooseFoodPlan(foodPlanId, recipeId);
     router.navigateTo("#/vælgdag");
 }
 
 window.chooseDay = (dayIndex, foodPlanId, recipeId) => {
-    let foodPlan = user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-    let recipe = mealplanner.allRecipes.concat(user.myRecipes).find(recipe => recipe.id == recipeId);
-    console.log(foodPlan);
-    console.log(recipe);
-    foodPlan.addRecipeToDay(dayIndex, recipe);
-    user.saveUser();
-    //update images
+    mealplanner.chooseDay(dayIndex, foodPlanId, recipeId)
+    //update dom
     mealplanner.appendFoodPlans();
     router.navigateTo("#/opskrifter");
 }
 
-/*todo properly*/
 window.removeRecipeFromDay = (foodPlanId, dayIndex) => {
-    let foodPlan = user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-    foodPlan.removeRecipeFromDay(dayIndex);
+    mealplanner.removeRecipeFromDay(foodPlanId, dayIndex);
+    // update dom
     mealplanner.appendFoodPlans();
     goToFoodPlanDetails(foodPlanId);
-    user.saveUser();
 }
 
-/*
-let recipe = {
-    id: "",
-    title: "Spaghetti Carbonara",
-    description: "Et klassisk pastaret fra Italien.",
-    img: "",
-    rating: 4,
-    time: 20,
-    price: "Middel",
-
-    country: "italien",
-    
-    gluten: true,
-    vegetarian: true,
-    vegan: false,
-    sugar: true,
-    dairy: true,
-
-    season: "",
-    theme: "",
-    holiday: "",
-
-
-    ingredients: [],
-    procedure: ["Sæt vandet i kog", "Hæld pasta i gryden"],
-
+window.addIngredientToShoppingList = () => {
+    mealplanner.addIngredientToShoppingList();
 }
 
-let user = {
-    favorites: ["id1", "id2", "id3", "id4"],
-    ownRecipes: [],
-    foodPlans: [ {monday: "recipeId", tuesday: "recipeId2"}, {monday}],
-    shoppingLists: [ {title: "Indkøbslsite mandag", ingredients: [ {name: "kartofler", amount: 2, unit: "kg"} ] } ]
-}*/
-/*
-if (user) {
-    skip onboarding
+window.createShoppinglist = () => {
+    mealplanner.createShoppingList();
+    // update dom
+    mealplanner.appendShoppingLists();
+    router.navigateTo("#/indkøbsliste");
 }
-*/
+
+window.shoppingListDetails = (id) => {
+    mealplanner.shoppingListDetails(id);
+    router.navigateTo("#/indkøbslistedetaljer");
+}
+
+window.checkIngredient = (id, ingredientId) => {
+    mealplanner.checkIngredient(id, ingredientId);
+}
+
+window.uncheckIngredient = (id, ingredientId) => {
+    mealplanner.uncheckIngredient(id, ingredientId);
+}
+
+window.removeShoppingList = (id) => {
+    user.removeShoppinglist(id);
+    mealplanner.appendShoppingLists();
+    router.navigateTo("#/indkøbsliste");
+}

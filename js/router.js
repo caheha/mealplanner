@@ -15,7 +15,9 @@ class Router {
             "#/opretmadplan": "opretmadplan",
             "#/madplandetaljer": "madplandetaljer",
             "#/vælgmadplan": "vælgmadplan",
-            "#/vælgdag": "vælgdag"
+            "#/vælgdag": "vælgdag",
+            "#/opretindkøbsliste": "opretindkøbsliste",
+            "#/indkøbslistedetaljer": "indkøbslistedetaljer"
         };
         this.initRouter();
     }

@@ -1,5 +1,6 @@
 import Recipe from "./recipe.js";
 import FoodPlan from "./foodPlan.js";
+import ShoppingList from "./shoppingList.js";
 
 export default class User {
     constructor() {
@@ -24,6 +25,9 @@ export default class User {
             for (const foodPlan of user.foodPlans) {
                 Object.setPrototypeOf(foodPlan, FoodPlan.prototype)
             }
+            for (const shoppingList of user.shoppingLists) {
+                Object.setPrototypeOf(shoppingList, ShoppingList.prototype)
+            }
             this.favorites = user.favorites; 
             this.myRecipes = user.myRecipes;
             this.foodPlans = user.foodPlans;
@@ -40,8 +44,8 @@ export default class User {
         this.saveUser();
     }
 
-    removeFavorite(recipeToRemove) {
-        this.favorites = this.favorites.filter(recipe => recipe.id != recipeToRemove.id);
+    removeFavorite(recipeIdToRemove) {
+        this.favorites = this.favorites.filter(recipe => recipe.id != recipeIdToRemove);
         this.saveUser();
     }
 
@@ -69,6 +73,16 @@ export default class User {
 
     removeFoodPlan(id) {
         this.foodPlans = this.foodPlans.filter(foodPlan => foodPlan.id != id);
+        this.saveUser();
+    }
+
+    addShoppingList(shoppingListToAdd) {
+        this.shoppingLists.push(shoppingListToAdd);
+        this.saveUser();
+    }
+
+    removeShoppinglist(id) {
+        this.shoppingLists = this.shoppingLists.filter(shoppingList => shoppingList.id != id);
         this.saveUser();
     }
 }

@@ -116,7 +116,7 @@
         <!--Beskrivelse input-->
         <textarea class="add-decription" rows="6" name="description" form="usrform" id="input-description" placeholder="Indsæt beskrivelse af opskrift..."></textarea>
 
-        <h4>ingredienser</h4>
+        <h4>Ingredienser</h4>
         <!--Mængde, ingredienser & enhed input-->
         <table id="ingredients-input"></table>
         <div class="add-ingredients">
@@ -198,11 +198,50 @@
         <section class="grid-container" id="pick-day-container"></section>
     </section>
     
-    <!-- edir user page -->
+    <!-- shopping lists page -->
     <section id="indkøbsliste" class="page">
         <header class="header text">
-            <h2>Indkøbsliste</h2>
+            <h2>Indkøbslister</h2>
+            <a class="nav-link right" href="#/opretindkøbsliste"><span class="material-icons">add</span></a>
         </header>
+        <section class="grid-container" id="shoppinglists-container"></section>
+    </section>
+
+    <!-- shopping list details page -->
+    <section id="indkøbslistedetaljer" class="page">
+        <header class="header text">
+            <a class="nav-link left" href="#/indkøbsliste"><span class="material-icons">chevron_left</span></a>
+            <h2 id="shopping-list-title">Indkøbsliste</h2>
+            <span id="remove-shopping-list" class="material-icons right" onclick="removeShoppingList()">delete</span>
+        </header>
+        <section class="grid-container" id="shopping-list-details"></section>
+    </section>
+
+    <!-- create shopping list page -->
+    <section id="opretindkøbsliste" class="page">
+        <header class="header text">
+            <h2>Opret indkøbsliste</h2>
+            <a class="nav-link left" href="#/indkøbsliste"><span class="material-icons">chevron_left</span></a>
+        </header>
+        <form>
+            <h4>Navn på indkøbsliste:</h4>
+            <input class="full" type="text" name="name" placeholder="f.eks. uge 23" id="shoppinglist-name">
+            <h4>Ingredienser</h4>
+            <!--Mængde, ingredienser & enhed input-->
+            <div id="ingredient-list"></div>
+            <div class="add-ingredients">
+                <div>
+                    <h5>Ingrediens</h5>
+                    <input type="text" name="name" placeholder="Mælk" id="ingredient-name" />
+                </div>
+                <div>
+                    <h5>Mængde</h5>
+                    <input type="text" name="amount" placeholder="1 L" id="ingredient-amount" />
+                </div>
+                <button type="button" onclick="addIngredientToShoppingList()">Tilføj</button>
+             </div>
+            <button class="submit" type="button" onclick="createShoppinglist()">Opret indkøbsliste</button>
+        </form>
     </section>
 
     <div class="click-menu"></div>

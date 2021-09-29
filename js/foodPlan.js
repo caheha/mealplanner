@@ -41,7 +41,7 @@ export default class FoodPlan {
                         <h2>Din madplan</h2>
                         <h3>${this.title}</h3>
                     </div>
-                    <button type="button" onclick="goToFoodPlanDetails(${this.id});">Se madplan</button>
+                    <button type="button" onclick="goToFoodPlanDetails(${this.id})">Se madplan</button>
                 </div>
             </article>
         `;

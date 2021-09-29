@@ -349,12 +349,13 @@ form {
 form input {
     padding: 0.25em;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border: none;
 }
 
 form input.full {
-    padding: 0.25em 0;
-    margin: 0.5em 0;
-    width: calc(100% - 0.5em);
+    padding: 0.5em;
+    margin: 0.5em 0 2em 0;
+    width: calc(100% - 1em);
 }
 
 form input.third {
@@ -418,6 +419,7 @@ article button {
 }
 
 .add-ingredients {
+    margin-top: 1em;
     display: flex;
     align-items: flex-end;
 }
@@ -482,6 +484,7 @@ article button {
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
 }
 
 /* Icon size */
@@ -555,6 +558,14 @@ article button {
 .recipe-container img {
     width: 100%;
     display: block;
+}
+
+#own-recipes-container .favorite, #own-recipes-container .bottom {
+    display: none;
+}
+
+.hide-details .favorite, .hide-details .bottom {
+    display: none !important;
 }
 
 /* -----------------------------------------------
@@ -761,6 +772,7 @@ ul li {
     right: 0.33em;
     top: 0.25em;
     color: var(--text-color-dark);
+    z-index: 99;
 }
 
 /* -----------------------------------------------
@@ -790,4 +802,49 @@ ul li {
 
 .click-menu div:last-child {
     border-bottom: none;
+}
+
+/* -----------------------------------------------
+                      Shopping list
+----------------------------------------------- */
+
+.check-box-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.check-box-wrapper > div {
+    padding: 0.5em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.shopping-list-item {
+    margin-top: 0.5em;
+    padding: 0.5em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    background-color: var(--white);
+    color: var(--text-color-dark);
+    display: flex;
+    justify-content: space-between;
+}
+
+#shoppinglists-container .shopping-list-item, .check-box-wrapper .shopping-list-item {
+    margin-top: 0;
+}
+
+.check-box {
+    margin-left: 0.5em;
+    justify-content: center;
+    max-width: 25px;
+    background-color: #FFC790;
+    color: white;
+}
+
+.checked {
+    background-color: var(--green);
 }
