@@ -2,26 +2,35 @@ export default class FoodPlan {
     constructor(name) {
         this.id = Date.now();
         this.title = name;
-        this.img = "./img/gluten.png";
+        this.img = "";
         this.days = [{}, {}, {}, {}, {}, {}, {}];
+        this.updateImage();
     }
 
     addRecipeToDay(index, recipe) {
         this.days[index] = recipe;
-        for (const recipe of this.days) {
-            if (recipe.img) {
-                console.log(recipe.img)
-                this.img = recipe.img;
-            }
-        }
+        this.updateImage();
     }
 
     /*todo properly*/
     removeRecipeFromDay(index) {
         this.days[index] = {};
+        this.updateImage();
+    }
+
+    updateImage() {
+        for (const recipe of this.days) {
+            if (recipe.img) {
+                this.img = recipe.img;
+                break;
+            } else {
+                this.img = "./img/mandag.png";
+            }
+        }
     }
 
     getHtml() {
+        this.updateImage();
         return /*html*/`
             <article class="food-plan">
                 <div class="image-wrapper">
@@ -32,7 +41,7 @@ export default class FoodPlan {
                         <h2>Din madplan</h2>
                         <h3>${this.title}</h3>
                     </div>
-                    <button type="button" onclick="goToFoodPlanDetails(${this.id})">Se madplan</button>
+                    <button type="button" onclick="goToFoodPlanDetails(${this.id});">Se madplan</button>
                 </div>
             </article>
         `;
@@ -47,12 +56,13 @@ export default class FoodPlan {
         let i = 0;
 
         for (const recipe of this.days) {
-            let img = recipe.img != null ? recipe.img: "./img/gluten.png";
             let title = recipe.title != null ? recipe.title : "Ingen opskrift";
-            let button = recipe.title != null ? /*html*/`<button type="button" onclick="goToDetails(${recipe.id})">Se opskrift</button>
-                                                         <button type="button" onclick="removeRecipeFromDay(${this.id}, ${i})">Fjern</button>`
-                                              : /*html*/`<button type="button" onclick="goToSearch()">Søg</button>
-                                                         <button type="button" onclick="goToFavorites()">Tilføj fra favoritter</button>`;
+            let button = recipe.title != null ? /*html*/`<button type="button" onclick="goToDetails(${recipe.id})">Se opskrift</button>`
+                                              : /*html*/`<button type="button" onclick="goToSearch()">Tilføj opskrift</button>`;
+
+
+            let remove = recipe.title != null ? /*html*/`<span class="material-icons remove-button" onclick="removeRecipeFromDay(${this.id}, ${i})">close</span>` : "";
+            
 
             switch(i) {
                 case 0:
@@ -83,12 +93,15 @@ export default class FoodPlan {
 
             i++;
 
+            let img = recipe.img != null ? recipe.img: "./img/" + day.toString().toLowerCase() + ".png";
+
             html += /*html*/`
                 <article class="food-plan">
                     <div class="image-wrapper">
                         <img src="${img}">
                     </div>
                     <div class="text-wrapper">
+                        ${remove}
                         <div>
                             <h2>${day}</h2>
                             <h3>${title}</h3>

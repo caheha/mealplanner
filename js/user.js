@@ -45,35 +45,21 @@ export default class User {
         this.saveUser();
     }
 
-    addRecipe() {
-        let nameInput = document.getElementById("name").value;
-        let imgInput = document.getElementById("img").value;
-        let decriptionInput = document.getElementById("decription").value;
-        let amountInput = document.getElementById("amount").value;
-        let unitInput = document.getElementById("unit").value;
-        let ingredientsInput = document.getElementById("ingredients").value;
-        let procedureInput = document.getElementById("procedure").value;
+    addRecipe(ingredients, procedure) {
+        let nameInput = document.getElementById("input-name").value;
+        let imgInput = document.getElementById("input-img").value;
+        let descriptionInput = document.getElementById("input-description").value;
 
-        if (nameInput && imgInput && decriptionInput && amountInput && unitInput && ingredientsInput && procedureInput){
-        let newRecipe = {
-            name: nameInput,
-            avatarUrl: imgInput,
-            decription: decriptionInput,
-            amount: amountInput,
-            unit: unitInput,
-            ingredients: ingredientsInput,
-            procedure: procedureInput
-            }
+        if (nameInput && imgInput && descriptionInput && ingredients.length > 0) {
+            let newRecipe = new Recipe(nameInput, descriptionInput, imgInput, 0, 0, 0, null, null, null, null, null, null, null, null, null, ingredients, procedure);
             
-        this.myRecipes.push(newRecipe);
-        appendPersons(this.myRecipes);  
-        navigateTo("#/favoritter");   
-    }
-    
+            this.myRecipes.push(newRecipe);
+        }
 
-
-        
-
+        document.getElementById("input-name").value = "";
+        document.getElementById("input-img").value = "";
+        document.getElementById("input-description").value = "";
+        this.saveUser();
     }
 
     addFoodPlan(foodPlanToAdd) {

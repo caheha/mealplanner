@@ -2,10 +2,10 @@ import MealPlanner from "./mealplanner.js";
 import Router from "./router.js";
 import User from "./user.js";
 import FoodPlan from "./foodPlan.js";
+import Recipe from "./recipe.js";
 
 let ingredients = [];
-let procedure = [];
-let newRecipe = [];
+let procedures = [];
 
 const app = document.querySelector("#app");
 
@@ -21,7 +21,7 @@ window.favorite = (id) => {
     } else {
         user.removeFavorite(user.favorites.find(recipe => recipe.id == id));
     }
-    mealplanner.appendFavorites(user.favorites);
+    mealplanner.appendFavorites(user.favorites, user.myRecipes);
 }
 
 /*todo properly*/
@@ -37,7 +37,7 @@ window.hideMenu = () => {
 
 window.search = (searchValue) => {
     mealplanner.search(searchValue);
-    mealplanner.appendFavorites(user.favorites);
+    mealplanner.appendFavorites(user.favorites, user.myRecipes);
 }
 
 window.searchFavorites = (searchValue) => {
@@ -47,7 +47,7 @@ window.searchFavorites = (searchValue) => {
 window.goToDetails = (id) => {
     mealplanner.details(id);
     router.navigateTo("#/opskriftsdetaljer");
-    mealplanner.appendFavorites(user.favorites);
+    mealplanner.appendFavorites(user.favorites, user.myRecipes);
 }
 
 window.multiplyAmount = (id, scale) => {
@@ -62,24 +62,96 @@ window.goToFavorites = () => {
     router.navigateTo("#/favoritter");
 }
 
-window.addIngredient = () => {
-    let amount
-    let unit
-    let ingredient = document.querySelector
-
-    
+window.goToFoodPlan = () => {
+    router.navigateTo("#/madplan");
 }
 
+window.goToShoppingList = () => {
+    router.navigateTo("#/indkøbsliste");
+}
+
+window.goToAddRecipe = () => {
+    router.navigateTo("#/opretopskrift");
+}
+
+/* ------ Add ingredients, procedure & save recipe ------ */
+
+window.addIngredient = () => {
+    let inputAmount = document.querySelector("#input-amount");
+    let inputUnit = document.querySelector("#input-unit");
+    let inputIngredient = document.querySelector("#input-ingredients");
+
+    // Update array
+    let newIngredient = {
+        amount: inputAmount.value,
+        unit: inputUnit.value,
+        name: inputIngredient.value
+    }
+
+    ingredients.push(newIngredient);
+
+    // Reset input fields
+    inputAmount.value = "";
+    inputUnit.value = "";
+    inputIngredient.value = "";
+
+    // Append ingredient
+    let table = document.querySelector("#ingredients-input");
+
+    let html = "";
+
+    for (const ingredient of ingredients) {                        
+        html += `
+            <tr>
+                <td>${ingredient.amount} ${ingredient.unit}</td>
+                <td>${ingredient.name}</td>
+            </tr>
+        `;
+    }
+            
+    table.innerHTML = html;
+}
+    
+
 window.addProcedure = () => {
-    let procedure = document.querySelector
+    // Get input
+    let inputProcedure = document.querySelector("#input-procedure");
+
+    // Update array
+    procedures.push(inputProcedure.value);
+
+    // Reset input
+    inputProcedure.value = "";
+
+    // Append procedure
+     let liste = document.querySelector("#procedure-input");
+
+    let html = "";
+
+    for (const procedure of procedures) {                        
+        html += `
+            <li>
+            ${procedure}
+            </li>
+        `;
+    }
+            
+    liste.innerHTML = html;
 
 }
 
 window.saveRecipe = () => {
+    user.addRecipe(ingredients, procedures)
     ingredients = [];
-    procedure = [];
-    newRecipe = [];
+    procedures = [];
+
+    mealplanner.appendFavorites(user.favorites, user.myRecipes);
+    router.navigateTo("#/favoritter");   
 }
+
+
+
+/* ------  ------ */
 
 window.createFoodPlan = () => {
     let nameContainer = document.querySelector("#foodplan-name");
@@ -146,6 +218,8 @@ window.chooseFoodPlan = (foodPlanId, recipeId) => {
                 break;
         }
 
+        let img = recipe.img != null ? recipe.img: "./img/" + day.toString().toLowerCase() + ".png";
+
         if (recipe.id != undefined) {
             html += /*html*/`
                 <article class="food-plan">
@@ -165,7 +239,7 @@ window.chooseFoodPlan = (foodPlanId, recipeId) => {
             html += /*html*/`
                 <article class="food-plan">
                     <div class="image-wrapper">
-                        <img src="./img/gluten.png">
+                        <img src="${img}">
                     </div>
                     <div class="text-wrapper">
                         <div>
@@ -186,7 +260,7 @@ window.chooseFoodPlan = (foodPlanId, recipeId) => {
 
 window.chooseDay = (dayIndex, foodPlanId, recipeId) => {
     let foodPlan = user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-    let recipe = mealplanner.allRecipes.find(recipe => recipe.id == recipeId);
+    let recipe = mealplanner.allRecipes.concat(user.myRecipes).find(recipe => recipe.id == recipeId);
     console.log(foodPlan);
     console.log(recipe);
     foodPlan.addRecipeToDay(dayIndex, recipe);
@@ -201,6 +275,7 @@ window.removeRecipeFromDay = (foodPlanId, dayIndex) => {
     let foodPlan = user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
     foodPlan.removeRecipeFromDay(dayIndex);
     mealplanner.appendFoodPlans();
+    goToFoodPlanDetails(foodPlanId);
     user.saveUser();
 }
 

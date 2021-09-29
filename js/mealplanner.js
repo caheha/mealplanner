@@ -16,7 +16,7 @@ export default class MealPlanner {
         this.shownRecipes = this.allRecipes;
 
         this.appendRecipes(this.allRecipes);
-        this.appendFavorites(this.user.favorites);
+        this.appendFavorites(this.user.favorites, this.user.myRecipes);
         this.appendFoodPlans();
     }
 
@@ -46,18 +46,41 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    appendFavorites(recipes) {
-        let container = this.domElement.querySelector("#favorites-container");
+    appendFavorites(favorites, ownRecipes) {
+        let favoritesContainer = this.domElement.querySelector("#favorites-container");
 
         let html = "<h2>Favoritter</h2>";
 
-        for (const recipe of recipes) {                        
-            html += recipe.getHtml();
+        if (favorites.length == 0) {
+            html += "<p class='small-text'>Du har ingen favoritter der matchede din søgning, eller så har du ikke tilføjet nogle endnu.</p>";
+        } else {
+            for (const recipe of favorites) {                        
+                html += recipe.getHtml();
+            }
         }
 
-        container.innerHTML = html;
+        favoritesContainer.innerHTML = html;
+
+        let ownRecipesContainer = this.domElement.querySelector("#own-recipes-container");
+
+        let ownRecipesHtml = "<h2>Mine opskrifter</h2>";
+
+        console.log(ownRecipes.length);
+
+        if (ownRecipes.length == 0) {
+            ownRecipesHtml += "<p class='small-text'>Du har ingen opskrifter der matchede din søgning, eller så har du ikke tilføjet nogle endnu.</p>";
+        } else {
+            for (const recipe of ownRecipes) {                        
+                ownRecipesHtml += recipe.getHtml();
+            }
+        }
+        ownRecipesContainer.innerHTML = ownRecipesHtml;
         
         // Make favorite icon green if favorited
+        this.updateFavoriteIcons();
+    }
+
+    updateFavoriteIcons() {
         let favoriteIcons = this.domElement.querySelectorAll(".favorite");
 
         for (const icon of favoriteIcons) {
@@ -80,6 +103,10 @@ export default class MealPlanner {
 
         for (const foodPlan of this.user.foodPlans) {
             html = foodPlan.getHtml() + html;
+        }
+
+        if (this.user.foodPlans.length == 0) {
+            html = "<p class='small-text'>Du har ikke oprettet nogle madplaner endnu, du kan oprette en ved at trykke på '+' i øverste højre hjørne.";
         }
 
         container.innerHTML = html;
@@ -127,22 +154,29 @@ export default class MealPlanner {
             let title = recipe.title.toLowerCase();
             let description = recipe.description.toLowerCase();
             let country = recipe.country.toLowerCase();
+            let theme = recipe.theme.toLowerCase();
+            let holiday = recipe.holiday ? recipe.holiday.toLowerCase : "";
+            //let price = recipe.price.toLowerCase();
+            //let time = recipe.time.toLowerCase();
             //let ingredients = recipe.ingredients.toLowerCase();
 
             if (title.includes(searchValue)
                 || description.includes(searchValue)
-                || country.includes(searchValue)
+                || country.includes(searchValue
+                || theme.includes(searchValue)
+                || holiday.includes(searchValue))
                 /*|| ingredients.includes(searchValue)*/) {
                 results.push(recipe);
-                }
-            this.appendRecipes(results);
+            }
         }
+        this.appendRecipes(results);
     }
 
     searchFavorites(searchValue) {
         searchValue = searchValue.toLowerCase();
 
         let results = [];
+        let results2 = []
 
         for (const recipe of this.user.favorites) {
             let title = recipe.title.toLowerCase();
@@ -161,13 +195,28 @@ export default class MealPlanner {
                 || holiday.includes(searchValue))
                 /*|| ingredients.includes(searchValue)*/) {
                 results.push(recipe);
-                }
-            this.appendFavorites(results);
+            }
         }
+
+        for (const recipe of this.user.myRecipes) {
+            let title = recipe.title.toLowerCase();
+            let description = recipe.description.toLowerCase();
+            //let price = recipe.price.toLowerCase();
+            //let time = recipe.time.toLowerCase();
+            //let ingredients = recipe.ingredients.toLowerCase();
+
+            if (title.includes(searchValue)
+                || description.includes(searchValue))
+                /*|| ingredients.includes(searchValue)*/ {
+                results2.push(recipe);
+            }
+        }
+        this.appendFavorites(results, results2);
     }
  
     details(id) {
-        const recipeToShow = this.allRecipes.find(recipe => recipe.id == id);
+        let array = this.allRecipes.concat(this.user.myRecipes);
+        const recipeToShow = array.find(recipe => recipe.id == id);
         document.querySelector("#recipe-detail-container").innerHTML = recipeToShow.getDetailHTML();
         this.multiplyIngredients(id, 1);
     }
@@ -180,7 +229,8 @@ export default class MealPlanner {
     }
     
     multiplyIngredients(id, amount) {
-        const recipeToShow = this.allRecipes.find(recipe => recipe.id == id);
+        let array = this.allRecipes.concat(this.user.myRecipes);
+        const recipeToShow = array.find(recipe => recipe.id == id);
         document.querySelector("#ingredients-table").innerHTML = recipeToShow.returnIngredientsHTML(amount);
     }
 

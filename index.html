@@ -29,10 +29,34 @@
 
     <!-- Pages -->
     <!-- Homepage -->
-    <section id="hjem" class="page">
-        <header class="header">
-            <h2>Hjem</h2>
+    <section id="hjem" class="page forside">
+        <header class="header-forside">
+            <img alt="MealPlanner logo" src="img/logo.png">
+            <p>"Den lette hverdag, ligger i <br> planlægningen"</p>
         </header>
+
+        <div onclick="goToSearch()" class="searchbar forside">
+            <span class="material-icons">search</span>
+            <input type="search" placeholder="Søg efter opskrifter eller ingredienser">
+        </div>
+
+        <div class="forside-kasser">
+            <div>
+                <div onclick="goToFoodPlan()" class="box1">Madplaner<span class="material-icons">edit_calendar</span></div>
+                <div onclick="goToShoppingList()" class="box2">Indkøbsliste<span class="material-icons">format_list_bulleted</span></div>
+            </div>
+            <div>
+                <div onclick="goToSearch()" class="box3">Vegetar<span class="material-icons">spa</span></div>
+                <div onclick="goToFavorites()" class="box4">Mine favoritter<span class="material-icons">favorite</span></div>
+                <div onclick="goToFavorites()" class="box5">Mine opskrifter<span class="material-icons">star</span></div>
+            </div>
+            <div>
+                <div onclick="goToSearch()" class="box6">Opskrifter<span class="material-icons">search</span></div>
+                <div onclick="goToAddRecipe()" class="box7">Tilføj ny opskrift<span class="material-icons">add</span></div>
+            </div>
+
+        </div>
+
 
     </section>
 
@@ -68,6 +92,7 @@
             <a class="nav-link right" href="#/opretopskrift"><span class="material-icons">add</span></a>
         </header>
         <section class="grid-container" id="favorites-container"></section>
+        <section class="grid-container" id="own-recipes-container"></section>
     </section>
 
 
@@ -81,43 +106,45 @@
     <form class="add-recipe"> 
         <h4>Titel</h4>
         <!--Titel input-->
-        <input type="text" name="name" placeholder="Navn på opskrift" id="name" />
+        <input type="text" name="name" placeholder="Navn på opskrift" id="input-name" />
         
         <h4>Tilføj et billede af retten</h4>
         <!--Billede input-->
-        <input type="text" name="img" placeholder="Image URL" id="img" />
+        <input type="text" name="img" placeholder="Image URL" id="input-img" />
 
         <h4>Beskrivelse</h4>
         <!--Beskrivelse input-->
-        <textarea class="add-decription" rows="6" name="description" form="usrform" id="description" placeholder="Indsæt beskrivelse af opskrift..."></textarea>
+        <textarea class="add-decription" rows="6" name="description" form="usrform" id="input-description" placeholder="Indsæt beskrivelse af opskrift..."></textarea>
 
         <h4>ingredienser</h4>
         <!--Mængde, ingredienser & enhed input-->
+        <table id="ingredients-input"></table>
         <div class="add-ingredients">
             <div>
                 <h5>Mængde</h5>
-                <input type="number" name="amount" placeholder="F.eks. 85" id="amount" />
+                <input type="number" name="amount" placeholder="F.eks. 85" id="input-amount" />
             </div>
             <div>
                 <h5>Måleenhed</h5>
-                <input type="text" name="unit" placeholder="F.eks. dl" id="unit" />
+                <input type="text" name="unit" placeholder="F.eks. dl" id="input-unit" />
             </div>
             <div>
-                <h5>ingredienser</h5>
-                <input type="text" name="ingredients" placeholder="F.eks. mælk" id="ingredients" />
+                <h5>Ingredienser</h5>
+                <input type="text" name="ingredients" placeholder="F.eks. mælk" id="input-ingredients" />
             </div>
-            <button onclick="addIngredient()">Tilføj</button>
+            <button type="button" onclick="addIngredient()">Tilføj</button>
          </div>
 
          <!--Fremgangsmåde input-->
-                         <h4>Fremgangsmåde</h4>
+        <h4>Fremgangsmåde</h4>
+        <ul id="procedure-input"></ul>
 
          <div class="add-procedure">
-                <input type="text" name="procedure" placeholder="Tilføj step" id="procedure" />
-                <button onclick="addProcedure()">Tilføj</button>
+                <input type="text" name="procedure" placeholder="Tilføj step" id="input-procedure" />
+                <button type="button" onclick="addProcedure()">Tilføj</button>
          </div>
 
-            <button class="submit" type="button" name="button" onclick="addRecipe()"> Tilføj opskrift </button>
+            <button class="submit" type="button" name="button" onclick="saveRecipe()"> Tilføj opskrift </button>
     </form>
     </section>
 

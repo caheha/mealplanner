@@ -127,6 +127,102 @@ img {
     right: 1em;
 }
 
+.small-text {
+    color:rgba(0, 0, 0, 0.3);
+    font-size: 1;
+}
+
+/* -----------------------------------------------
+                      Forside
+----------------------------------------------- */
+.page.forside{
+padding-top: 0;
+}
+
+.header-forside {
+    background-color: var(--green);
+    color: var(--text-color-light);
+    height: 13em;
+    display: block;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.header-forside p {
+    text-align: center;
+}
+
+.header-forside img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    padding-top: 20px;
+}
+
+.searchbar.forside{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.forside-kasser{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: calc(100% - 3em);
+    display: flex;
+    flex-direction: column;
+}
+
+.forside-kasser > div {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+
+.forside-kasser > div > div {
+    padding: 1em;
+    flex-grow: 1;
+    border-radius: 10px;
+    height: 3.5em;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.forside-kasser > div > div span {
+    position: absolute;
+    top: 0.25em;
+    right: 0.25em;
+}
+
+.forside-kasser > div > div:first-child {
+    margin-right: 0.5em;
+}
+
+.forside-kasser > div:nth-child(2) > div:last-child {
+    margin-left: 0.5em;
+}
+
+/* Background color frontpage quick access */
+.box1 { background-color: #C55D98 }
+.box2 { background-color: #C55D5D }
+.box3 { background-color: #5DC567 }
+.box4 { background-color: #825CD9 }
+.box5 { background-color: #5D84C5 }
+
+.box6 {
+    background-color: #E7A34A;
+}
+
+.box7 {
+    background-color: #5DC5B4;
+}
+
+
+
 
 /* -----------------------------------------------
                       Search
@@ -252,6 +348,7 @@ form {
 
 form input {
     padding: 0.25em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
 form input.full {
@@ -479,13 +576,14 @@ article button {
     margin-bottom: 15px;
 }
 
-.recipe-details-container ul {
+ul {
     padding-left: 1em;
     color: #A2A2A2;
 }
 
-.recipe-details-container ul li {
+ul li {
     margin-bottom: 5px;
+
 }
 
 .dropdown {
@@ -525,17 +623,17 @@ article button {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
-#ingredients-table {
+#ingredients-table, #ingredients-input {
     margin-bottom: 2em;
 }
 
-#ingredients-table td {
+#ingredients-table td, #ingredients-input td {
     padding: 0 5px;
     color: #A2A2A2;
 }
 
 
-#ingredients-table td:first-child {
+#ingredients-table td:first-child, #ingredients-input td:first-child{
     padding: 0 1em 0 0;
 }
 
@@ -596,11 +694,12 @@ article button {
     background-color: var(--white);
     display: flex;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    position: relative;
 
 }
 
-.food-plan .image-wrapper{
-    width: calc(100% / 3);
+.food-plan .image-wrapper {
+    width: calc(100% / 3 + 3em);
     background-color: var(--green);
     display: flex;
     justify-content: center;
@@ -623,7 +722,6 @@ article button {
 }
 
 .food-plan h2, .food-plan h3 {
-    width: 100%;
     margin: 0;
     padding: 0;
     font-size: 1em;
@@ -631,16 +729,38 @@ article button {
 
 .food-plan h2 {
     font-weight: 400;
+    position: relative;
+}
+
+.food-plan h2::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 1px;
+    width: 3em;
+    bottom: 0;
+    left: 0;
 }
 
 .food-plan h3 {
     font-weight: 600;
-    font-size: 1.2em;
+}
+
+#foodplan-name {
+    border: none;
+    padding: 0.5em 0.25em;
 }
 
 .food-plan button {
     margin-top: 0.2em;
     padding: 0.5em 1em;
+}
+
+.remove-button {
+    position: absolute;
+    right: 0.33em;
+    top: 0.25em;
+    color: var(--text-color-dark);
 }
 
 /* -----------------------------------------------
