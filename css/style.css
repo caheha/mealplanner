@@ -127,6 +127,7 @@ img {
     right: 1em;
 }
 
+/* Small descirption text */
 .small-text {
     color:rgba(0, 0, 0, 0.3);
     font-size: 1;
@@ -139,6 +140,7 @@ img {
 padding-top: 0;
 }
 
+/* Banner on frontpage */
 .header-forside {
     background-color: var(--green);
     color: var(--text-color-light);
@@ -212,22 +214,12 @@ padding-top: 0;
 .box3 { background-color: #5DC567 }
 .box4 { background-color: #825CD9 }
 .box5 { background-color: #5D84C5 }
-
-.box6 {
-    background-color: #E7A34A;
-}
-
-.box7 {
-    background-color: #5DC5B4;
-}
-
-
-
+.box6 { background-color: #E7A34A }
+.box7 { background-color: #5DC5B4 }
 
 /* -----------------------------------------------
                       Search
 ----------------------------------------------- */
-
 .searchbar {
     background-color: var(--white);
     border-radius: 50px;
@@ -237,6 +229,7 @@ padding-top: 0;
     padding: 5px 0;
 }
 
+/* Icon */
 .searchbar span {
     padding-left: 5px;
     color: var(--text-color-dark)
@@ -248,7 +241,7 @@ padding-top: 0;
 }
 
 /* -----------------------------------------------
-                        Back
+            Return, delete/add buttons
 ----------------------------------------------- */
 
 .left, .right {
@@ -262,9 +255,6 @@ padding-top: 0;
 .left span, .right span {
     font-size: 2em;
 }
-
-
-
 
 /* -----------------------------------------------
                       Pages
@@ -446,14 +436,17 @@ article button {
     justify-content: space-between;
 }
 
-
-
-
-
-
 /* -----------------------------------------------
                    Grid container
 ----------------------------------------------- */
+.content-container {
+    padding: 1em;
+}
+
+.header-padding {
+    padding: 1em 1em 0
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -560,6 +553,7 @@ article button {
     display: block;
 }
 
+/* Hide details from own recipes */
 #own-recipes-container .favorite, #own-recipes-container .bottom {
     display: none;
 }
@@ -574,7 +568,6 @@ article button {
 .recipe-details-container .icons {
     display: flex;
 }
-
 
 .recipe-details-container .icons > img {
     width: 1.25em;
@@ -610,14 +603,12 @@ ul li {
     content: '>';
     color: var(--white);
     transform: rotate(90deg);
-    /*Adjust for position however you want*/
     height: 30px;
     width: 30px;
     background-color: var(--green);
     
     top: 0;
     right: 0;
-    /*left line */
     
     position: absolute;
     pointer-events: none;
@@ -642,7 +633,6 @@ ul li {
     padding: 0 5px;
     color: #A2A2A2;
 }
-
 
 #ingredients-table td:first-child, #ingredients-input td:first-child{
     padding: 0 1em 0 0;
@@ -695,7 +685,6 @@ ul li {
     width: 100%;
     display: block;
 }
-
 
 /* -----------------------------------------------
                     Food plan
@@ -778,14 +767,26 @@ ul li {
 /* -----------------------------------------------
                    Click menu
 ----------------------------------------------- */
+.click-menu-wrapper {
+    display: none;
+    position: fixed;
+    z-index: 9;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
 .click-menu {
     background-color: var(--white);
-    position: absolute;
-    top: 0;
-    left: 0;
+    min-width: 215px;
     border-radius: 10px;
     z-index: 999;
-    display: none;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
@@ -805,15 +806,19 @@ ul li {
 }
 
 /* -----------------------------------------------
-                      Shopping list
+                  Shopping list
 ----------------------------------------------- */
 
-.check-box-wrapper {
+.check-box-wrapper, .ingredient-item-wrapper {
     display: flex;
     justify-content: space-between;
 }
 
-.check-box-wrapper > div {
+.ingredient-item-wrapper {
+    margin-bottom: 0.5em;
+}
+
+.check-box-wrapper > div, .ingredient-item-wrapper > div {
     padding: 0.5em;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
@@ -833,7 +838,11 @@ ul li {
     justify-content: space-between;
 }
 
-#shoppinglists-container .shopping-list-item, .check-box-wrapper .shopping-list-item {
+#shoppinglists-container .shopping-list-item:hover {
+    cursor: pointer;
+}
+
+#shoppinglists-container .shopping-list-item, .check-box-wrapper .shopping-list-item, .ingredient-item-wrapper .shopping-list-item {
     margin-top: 0;
 }
 
@@ -842,6 +851,14 @@ ul li {
     justify-content: center;
     max-width: 25px;
     background-color: #FFC790;
+    color: white;
+}
+
+.remove-box {
+    margin-left: 0.5em;
+    justify-content: center;
+    max-width: 25px;
+    background-color: #C55D5D;
     color: white;
 }
 

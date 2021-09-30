@@ -1,3 +1,4 @@
+// FoodPlan class
 export default class FoodPlan {
     constructor(name) {
         this.id = Date.now();
@@ -7,28 +8,33 @@ export default class FoodPlan {
         this.updateImage();
     }
 
+    // Adds a recipe to day index
     addRecipeToDay(index, recipe) {
         this.days[index] = recipe;
         this.updateImage();
     }
 
-    /*todo properly*/
+    // Removes recipe from day index
     removeRecipeFromDay(index) {
         this.days[index] = {};
         this.updateImage();
     }
 
+    // Updates which image is shown on food plans page
     updateImage() {
         for (const recipe of this.days) {
             if (recipe.img) {
+                // If a recipe is added, use the first image
                 this.img = recipe.img;
                 break;
             } else {
+                // If no recipe.img is found, use standard graphic
                 this.img = "./img/mandag.png";
             }
         }
     }
 
+    // Updates image, returns HTML to show on food plans page 
     getHtml() {
         this.updateImage();
         return /*html*/`
@@ -47,12 +53,10 @@ export default class FoodPlan {
         `;
     }
 
+    // Returns food plan details for details page
     getDetailHTML() {
-
         let html = "";
-
         let day = "";
-
         let i = 0;
 
         for (const recipe of this.days) {
@@ -63,7 +67,7 @@ export default class FoodPlan {
 
             let remove = recipe.title != null ? /*html*/`<span class="material-icons remove-button" onclick="removeRecipeFromDay(${this.id}, ${i})">close</span>` : "";
             
-
+            // Returns which day the current index represents
             switch(i) {
                 case 0:
                     day = "Mandag";
@@ -115,6 +119,7 @@ export default class FoodPlan {
         return html;
     }
 
+    // Returns HTML for picking food plan when you want to add a recipe
     getPickHtml(id) {
         return /*html*/`
             <article class="food-plan">

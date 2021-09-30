@@ -1,11 +1,14 @@
+// Import
 import Recipe from './recipe.js';
 import FoodPlan from './foodPlan.js';
 import ShoppingList from './shoppingList.js';
 
+// Arrays for creating recipe and shoppingList
 let ingredients = [];
 let procedures = [];
 let shoppingListIngredients = [];
 
+// MealPlanner class
 export default class MealPlanner {
     constructor(domElement, user) {
         this.domElement = domElement;
@@ -17,6 +20,7 @@ export default class MealPlanner {
         this.init();
     }
 
+    // Fetch recipes, append to pages
     async init() {
         await this.fetchRecipes();
         this.shownRecipes = this.allRecipes;
@@ -27,7 +31,7 @@ export default class MealPlanner {
         this.appendShoppingLists();
     }
 
-    // Henter JSON fra lokal fil og returnerer den
+    // Fetches recipe json, creates Recipe from each
     async fetchRecipes() {
         let response = await fetch(this.baseUrl);
         let data = await response.json();
@@ -40,39 +44,38 @@ export default class MealPlanner {
         return this.allRecipes;
     }
         
+    // Appends recipe HTML to page
     appendRecipes(recipes) {
         let container = this.domElement.querySelector("#recipes-container");
 
         let html = "";
-
         for (const recipe of recipes) {                        
             html += recipe.getHtml();
         }
-                
         container.innerHTML = html;
     }
 
+    // Appends favorites HTML to page
     appendFavorites(favorites, ownRecipes) {
-        let favoritesContainer = this.domElement.querySelector("#favorites-container");
-
-        let html = "<h2>Favoritter</h2>";
-
+        // Favorites
+        const favoritesContainer = this.domElement.querySelector("#favorites-container");
+        let html = "";
         if (favorites.length == 0) {
-            html += "<p class='small-text'>Du har ingen favoritter der matchede din søgning, eller så har du ikke tilføjet nogle endnu.</p>";
+            html += "<p class='small-text'>Du har ingen favoritter der matchede din søgning, " + 
+                    "eller så har du ikke tilføjet nogle endnu.</p>";
         } else {
             for (const recipe of favorites) {                        
                 html += recipe.getHtml();
             }
         }
-
         favoritesContainer.innerHTML = html;
 
-        let ownRecipesContainer = this.domElement.querySelector("#own-recipes-container");
-
-        let ownRecipesHtml = "<h2>Mine opskrifter</h2>";
-
+        // Own recipes
+        const ownRecipesContainer = this.domElement.querySelector("#own-recipes-container");
+        let ownRecipesHtml = "";
         if (ownRecipes.length == 0) {
-            ownRecipesHtml += "<p class='small-text'>Du har ingen opskrifter der matchede din søgning, eller så har du ikke tilføjet nogle endnu.</p>";
+            ownRecipesHtml += "<p class='small-text'>Du har ingen opskrifter der matchede din søgning, " +
+                              "eller så har du ikke tilføjet nogle endnu.</p>";
         } else {
             for (const recipe of ownRecipes) {                        
                 ownRecipesHtml += recipe.getHtml();
@@ -80,13 +83,13 @@ export default class MealPlanner {
         }
         ownRecipesContainer.innerHTML = ownRecipesHtml;
         
-        // Make favorite icon green if favorited
+        // Update favorite icon state
         this.updateFavoriteIcons();
     }
 
+    // Makes favorite icon green if recipe is in favorite array
     updateFavoriteIcons() {
-        let favoriteIcons = this.domElement.querySelectorAll(".favorite");
-
+        const favoriteIcons = this.domElement.querySelectorAll(".favorite");
         for (const icon of favoriteIcons) {
             let id = icon.id.slice(7)
 
@@ -100,35 +103,35 @@ export default class MealPlanner {
         }
     }
 
+    // Appends food plans to page
     appendFoodPlans() {
-        let container = this.domElement.querySelector("#foodplans-container");
-
+        const container = this.domElement.querySelector("#foodplans-container");
         let html = "";
-
         for (const foodPlan of this.user.foodPlans) {
             html = foodPlan.getHtml() + html;
         }
-
         if (this.user.foodPlans.length == 0) {
-            html = "<p class='small-text'>Du har ikke oprettet nogle madplaner endnu, du kan oprette en ved at trykke på '+' i øverste højre hjørne.";
+            html = "<p class='small-text'>Du har ikke oprettet en madplaner endnu, du kan oprette en " +
+                   "ved at trykke på '+' i øverste højre hjørne.</p>";
         }
-
         container.innerHTML = html;
     }
 
-    
+    // Appends shopping lists to page
     appendShoppingLists() {
-        let container = this.domElement.querySelector("#shoppinglists-container");
-
+        const container = this.domElement.querySelector("#shoppinglists-container");
         let html = "";
-
         for (const shoppingList of this.user.shoppingLists) {                        
             html += shoppingList.getHtml();
         }
-                
+        if (this.user.shoppingLists.length == 0) {
+            html = "<p class='small-text'>Du har ikke oprettet en indkøbslister endnu, du kan oprette en " +
+                   "ved at trykke på '+' i øverste højre hjørne.</p>";
+        } 
         container.innerHTML = html;
     }
 
+    // Add or remove favorite from user
     favorite(id) {
         if (!this.user.favorites.find(recipe => recipe.id == id)) {
             this.user.addFavorite(this.allRecipes.find(recipe => recipe.id == id));
@@ -137,111 +140,91 @@ export default class MealPlanner {
         }
     }
 
-    /*to do properly*/
-    showMenu(id, type) {
-        let container = this.domElement.querySelector(".click-menu");
-        let currentBox = this.domElement.querySelector(`#add-${id}`);
-        let x = currentBox.getBoundingClientRect().left;
-        let y = currentBox.getBoundingClientRect().top;
-        container.innerHTML = /*html*/`
+    // Shows menu when '+' is clicked
+    showMenu(id) {
+        const modal = this.domElement.querySelector(".click-menu-wrapper");
+        const menu = this.domElement.querySelector(".click-menu");
+        menu.innerHTML = /*html*/`
             <div onclick="addToFoodPlan(${id}); hideMenu()">
                 <span class="material-icons">edit_calendar</span>Tilføj til madplan
             </div>
-            <div>
+            <div onclick="addRecipeToShoppingList(${id}); hideMenu()">
                 <span class="material-icons">format_list_bulleted</span>Tilføj til indkøbsliste
             </div>
         `;
-        container.style.display = "block";
-        if (type == 1) {
-            container.style.left = `calc(${x}px - 180px)`;
-            container.style.top = `calc(${y}px + ${window.pageYOffset}px - 10px)`;
-        } else {
-            container.style.left = `calc(${x}px + 165px)`;
-            container.style.top = `calc(${y}px + ${window.pageYOffset}px + 100px)`;
-        }
+        modal.style.display = "flex";
     }
 
-    /*to do properly*/
+    // Hides menu
     hideMenu() {
-        let container = this.domElement.querySelector(".click-menu");
-        container.style.display = "none";
+        this.domElement.querySelector(".click-menu-wrapper").style.display = "none";
     }
-
-/* Search functionality */
     
+    // Search recipes on recipe page, appends results
     search(searchValue) {
         searchValue = searchValue.toLowerCase();
-
         let results = [];
-
         for (const recipe of this.shownRecipes) {
             let title = recipe.title.toLowerCase();
             let description = recipe.description.toLowerCase();
             let country = recipe.country.toLowerCase();
             let theme = recipe.theme.toLowerCase();
             let holiday = recipe.holiday ? recipe.holiday.toLowerCase : "";
-            //let price = recipe.price.toLowerCase();
-            //let time = recipe.time.toLowerCase();
-            //let ingredients = recipe.ingredients.toLowerCase();
 
             if (title.includes(searchValue)
                 || description.includes(searchValue)
-                || country.includes(searchValue
+                || country.includes(searchValue)
                 || theme.includes(searchValue)
-                || holiday.includes(searchValue))
-                /*|| ingredients.includes(searchValue)*/) {
+                || holiday.includes(searchValue)) {
                 results.push(recipe);
             }
         }
         this.appendRecipes(results);
     }
 
+    // Search recipes on favorite page, appens results
     searchFavorites(searchValue) {
         searchValue = searchValue.toLowerCase();
 
         let results = [];
         let results2 = []
 
+        // Favorites
         for (const recipe of this.user.favorites) {
             let title = recipe.title.toLowerCase();
             let description = recipe.description.toLowerCase();
             let country = recipe.country.toLowerCase();
             let theme = recipe.theme.toLowerCase();
             let holiday = recipe.holiday ? recipe.holiday.toLowerCase : "";
-            //let price = recipe.price.toLowerCase();
-            //let time = recipe.time.toLowerCase();
-            //let ingredients = recipe.ingredients.toLowerCase();
 
             if (title.includes(searchValue)
                 || description.includes(searchValue)
-                || country.includes(searchValue
+                || country.includes(searchValue)
                 || theme.includes(searchValue)
-                || holiday.includes(searchValue))
-                /*|| ingredients.includes(searchValue)*/) {
+                || holiday.includes(searchValue)) {
                 results.push(recipe);
             }
         }
 
+        // Own recipes
         for (const recipe of this.user.myRecipes) {
             let title = recipe.title.toLowerCase();
             let description = recipe.description.toLowerCase();
-            //let price = recipe.price.toLowerCase();
-            //let time = recipe.time.toLowerCase();
-            //let ingredients = recipe.ingredients.toLowerCase();
 
             if (title.includes(searchValue)
-                || description.includes(searchValue))
-                /*|| ingredients.includes(searchValue)*/ {
+                || description.includes(searchValue)) {
                 results2.push(recipe);
             }
         }
+        // Append
         this.appendFavorites(results, results2);
     }
  
+    // Updates info on recipe details page
     details(id) {
         const recipes = this.allRecipes.concat(this.user.myRecipes);
         const recipeToShow = recipes.find(recipe => recipe.id == id);
-        const container = document.querySelector("#recipe-detail-container");
+        const container = this.domElement.querySelector("#recipe-detail-container");
         container.innerHTML = recipeToShow.getDetailHTML();
         if (this.user.myRecipes.find(recipe => recipe.id == recipeToShow.id)) {
             container.classList.add("hide-details");
@@ -251,16 +234,19 @@ export default class MealPlanner {
         this.multiplyIngredients(id, 1);
     }
 
+    // Multiplies amount of ingredients when dropdown is used
     multiplyIngredients(id, amount) {
         let array = this.allRecipes.concat(this.user.myRecipes);
         const recipeToShow = array.find(recipe => recipe.id == id);
-        document.querySelector("#ingredients-table").innerHTML = recipeToShow.returnIngredientsHTML(amount);
+        this.domElement.querySelector("#ingredients-table").innerHTML = recipeToShow.returnIngredientsHTML(amount);
     }
 
+    // Adds an ingredient to new recipe
     addIngredient() {
-        let inputAmount = document.querySelector("#input-amount");
-        let inputUnit = document.querySelector("#input-unit");
-        let inputIngredient = document.querySelector("#input-ingredients");
+        // Input
+        const inputAmount = this.domElement.querySelector("#input-amount");
+        const inputUnit = this.domElement.querySelector("#input-unit");
+        const inputIngredient = this.domElement.querySelector("#input-ingredients");
 
         // Update array
         let newIngredient = {
@@ -268,7 +254,6 @@ export default class MealPlanner {
             unit: inputUnit.value,
             name: inputIngredient.value
         }
-
         ingredients.push(newIngredient);
 
         // Reset input fields
@@ -277,10 +262,8 @@ export default class MealPlanner {
         inputIngredient.value = "";
 
         // Append ingredient
-        let table = document.querySelector("#ingredients-input");
-
+        const table = this.domElement.querySelector("#ingredients-input");
         let html = "";
-
         for (const ingredient of ingredients) {                        
             html += `
                 <tr>
@@ -288,14 +271,14 @@ export default class MealPlanner {
                     <td>${ingredient.name}</td>
                 </tr>
             `;
-        }
-            
+        }      
         table.innerHTML = html;
     }
 
+    // Adds a procedure to new recipe
     addProcedure() {
-        // Get input
-        let inputProcedure = document.querySelector("#input-procedure");
+        // Input
+        const inputProcedure = this.domElement.querySelector("#input-procedure");
 
         // Update array
         procedures.push(inputProcedure.value);
@@ -304,19 +287,17 @@ export default class MealPlanner {
         inputProcedure.value = "";
 
         // Append procedure
-        let liste = document.querySelector("#procedure-input");
-
+        const list = this.domElement.querySelector("#procedure-input");
         let html = "";
-
         for (const procedure of procedures) {                        
             html += `
                 <li>${procedure}</li>
             `;
-        }
-                
-        liste.innerHTML = html;
+        }       
+        list.innerHTML = html;
     }
 
+    // Saves the new recipe to current user, resets arrays
     saveRecipe() {
         this.user.addRecipe(ingredients, procedures)
         this.appendFavorites(this.user.favorites, this.user.myRecipes);
@@ -324,30 +305,34 @@ export default class MealPlanner {
         procedures = [];
     }
 
+    // Creates a new food plan and adds it to current user, reset input
     createFoodPlan() {
-        const nameContainer = document.querySelector("#foodplan-name");
+        const nameContainer = this.domElement.querySelector("#foodplan-name");
         this.user.addFoodPlan(new FoodPlan(nameContainer.value));
         nameContainer.value = "";
     }
 
+    // Updates info on food plan details page
     foodPlanDetails(id) {
         const foodPlanToShow = this.user.foodPlans.find(foodPlan => foodPlan.id == id);
-        document.querySelector("#food-plan-title").innerHTML = foodPlanToShow.title;
-        document.querySelector("#remove-food-plan").setAttribute("onclick", `javascript: removeFoodPlan(${id})`);
-        document.querySelector("#food-plan-details").innerHTML = foodPlanToShow.getDetailHTML();
+        this.domElement.querySelector("#food-plan-title").innerHTML = foodPlanToShow.title;
+        this.domElement.querySelector("#remove-food-plan").setAttribute("onclick", `javascript: removeFoodPlan(${id})`);
+        this.domElement.querySelector("#food-plan-details").innerHTML = foodPlanToShow.getDetailHTML();
     }
 
+    // Updates food plans on pick food plan page
     addToFoodPlan(id) {
-        let container = document.querySelector("#pick-food-plan-container");
+        const container = this.domElement.querySelector("#pick-food-plan-container");
         container.innerHTML = "";
         for (const foodPlan of this.user.foodPlans) {
             container.innerHTML = foodPlan.getPickHtml(id) + container.innerHTML;
         }
     }
 
+    // Updates days on pick day page
     chooseFoodPlan(foodPlanId, recipeId) {
         let foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-        let container = document.querySelector("#pick-day-container");
+        let container = this.domElement.querySelector("#pick-day-container");
         let html = "";
         let i = 0;
         let day = "Mandag";
@@ -415,35 +400,57 @@ export default class MealPlanner {
             }
             i++;
         }
-
         container.innerHTML = html;
     }
 
+    // When day is chosen, add recipe to chosen food plan on given day, save user
     chooseDay(dayIndex, foodPlanId, recipeId) {
-        let foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
-        let recipe = this.allRecipes.concat(this.user.myRecipes).find(recipe => recipe.id == recipeId);
+        const foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
+        const recipe = this.allRecipes.concat(this.user.myRecipes).find(recipe => recipe.id == recipeId);
         foodPlan.addRecipeToDay(dayIndex, recipe);
         this.user.saveUser();
     }
 
+    // Removes recipe from given day, save user
     removeRecipeFromDay(foodPlanId, dayIndex) {
-        let foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
+        const foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
         foodPlan.removeRecipeFromDay(dayIndex);
         this.user.saveUser();
     }
 
-    createShoppingList() {
-        let inputTitle = document.querySelector("#shoppinglist-name");
-        this.user.addShoppingList(new ShoppingList(inputTitle.value, shoppingListIngredients));
-        this.user.saveUser();
+    // Updates create new shopping list page with ingredients from chosen recipe
+    addRecipeToShoppingList(recipeId) {
+        const recipeToAdd = this.allRecipes.concat(this.user.myRecipes).find(recipe => recipe.id == recipeId);
+        this.domElement.querySelector("#shoppinglist-name").value = recipeToAdd.title;
         shoppingListIngredients = [];
-        inputTitle.value = ""
-        document.querySelector("#ingredient-list").innerHTML = "";
+
+        for (const ingredient of recipeToAdd.ingredients) {
+            let newIngredient = {
+                id: Date.now() + Math.random(),
+                name: ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1),
+                amount: ingredient.amount + " " + ingredient.unit,
+                status: false
+            }
+            shoppingListIngredients.push(newIngredient);
+        }
+        this.appendIngredientsToList();
     }
 
+    // Creates new shopping list, reset input
+    createShoppingList() {
+        const inputTitle = this.domElement.querySelector("#shoppinglist-name");
+        this.user.addShoppingList(new ShoppingList(inputTitle.value, shoppingListIngredients));
+        this.user.saveUser();
+
+        shoppingListIngredients = [];
+        inputTitle.value = ""
+        this.domElement.querySelector("#ingredient-list").innerHTML = "";
+    }
+
+    // Add a new ingredient to temporary array, update dom
     addIngredientToShoppingList() {
-        let ingredientName = document.querySelector("#ingredient-name");
-        let ingredientAmount = document.querySelector("#ingredient-amount");
+        const ingredientName = this.domElement.querySelector("#ingredient-name");
+        const ingredientAmount = this.domElement.querySelector("#ingredient-amount");
 
         if (ingredientName.value) {
             let newIngredient = {
@@ -454,44 +461,61 @@ export default class MealPlanner {
             }
         
             shoppingListIngredients.push(newIngredient);
-        
-            // Append 
-            let container = document.querySelector("#ingredient-list");
-            let html = "";
-        
-            for (const ingredient of shoppingListIngredients) {                        
-                html += `
-                    <div class="shopping-list-item"><p>${ingredient.name}</p><p>${ingredient.amount}</p></div>
-                `;
-            }
+
+            this.appendIngredientsToList();
         
             ingredientName.value = "";
             ingredientAmount.value = "";
-        
-            container.innerHTML = html;
         }
     }
 
-    shoppingListDetails(id) {
-        const shoppingListToShow = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
-        document.querySelector("#shopping-list-title").innerHTML = shoppingListToShow.title;
-        document.querySelector("#remove-shopping-list").setAttribute("onclick", `javascript: removeShoppingList(${id})`);
-        document.querySelector("#shopping-list-details").innerHTML = shoppingListToShow.getDetailHtml();
+    // Updates DOM with current ingredient list
+    appendIngredientsToList() {
+        // Append 
+        const container = this.domElement.querySelector("#ingredient-list");
+        const html = "";
+    
+        for (const ingredient of shoppingListIngredients) {   
+            const removeBox = /*html*/`<div onclick="removeIngredientFromList(${ingredient.id})" class="remove-box"><span class="material-icons">close</span></div>`                  
+            html += `
+                <div class="ingredient-item-wrapper">
+                <div class="shopping-list-item"><p>${ingredient.name}</p><p>${ingredient.amount}</p></div>
+                ${removeBox}
+                </div>
+            `;
+        }
+        container.innerHTML = html;
     }
 
+    // Removes an ingredient from temporary array, update DOM
+    removeIngredientFromList(ingredientId) {
+        shoppingListIngredients = shoppingListIngredients.filter(ingredient => ingredient.id != ingredientId);
+        this.appendIngredientsToList();
+    }
+
+    // Updates shopping list details page
+    shoppingListDetails(id) {
+        const shoppingListToShow = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
+        this.domElement.querySelector("#shopping-list-title").innerHTML = shoppingListToShow.title;
+        this.domElement.querySelector("#remove-shopping-list").setAttribute("onclick", `javascript: removeShoppingList(${id})`);
+        this.domElement.querySelector("#shopping-list-details").innerHTML = shoppingListToShow.getDetailHtml();
+    }
+
+    // Changes state to 'in basket', update dom
     checkIngredient(id, ingredientId) {
         const shoppingListToEdit = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
         shoppingListToEdit.checkIngredient(ingredientId);
         this.user.saveUser();
-        document.querySelector("#shopping-list-details").innerHTML = shoppingListToEdit.getDetailHtml();
+        this.domElement.querySelector("#shopping-list-details").innerHTML = shoppingListToEdit.getDetailHtml();
     }
 
-   uncheckIngredient(id, ingredientId) {
-        const shoppingListToEdit = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
-        shoppingListToEdit.uncheckIngredient(ingredientId);
-        this.user.saveUser();
-        document.querySelector("#shopping-list-details").innerHTML = shoppingListToEdit.getDetailHtml();
-   }
+    // Changes state to 'not in basket', update dom
+    uncheckIngredient(id, ingredientId) {
+            const shoppingListToEdit = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
+            shoppingListToEdit.uncheckIngredient(ingredientId);
+            this.user.saveUser();
+            this.domElement.querySelector("#shopping-list-details").innerHTML = shoppingListToEdit.getDetailHtml();
+    }
 
 }
 

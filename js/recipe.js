@@ -1,5 +1,7 @@
+// Recipe index
 let i = 0;
 
+// Recipe class
 export default class Recipe {
     constructor(title, description, img, rating, time, price, country, glutenfree, vegetarian, 
                 vegan, sugarfree, dairyfree, season, theme, holiday, ingredients, procedure) {
@@ -10,24 +12,20 @@ export default class Recipe {
         this.rating = rating;
         this.time = time;
         this.price = price;
-
         this.country = country;
-
         this.glutenfree = glutenfree;
         this.vegetarian = vegetarian;
         this.vegan = vegan;
         this.sugarfree = sugarfree;
         this.dairyfree = dairyfree;
-
         this.season = season;
         this.theme = theme;
         this.holiday = holiday;
-
         this.ingredients = ingredients;
         this.procedure = procedure;   
     }
 
-    // Returnerer HTML der kan indsættes på siden
+    // Returns HTML on search/favorites page
     getHtml() {
         return /*html*/`
             <article class="recipe-container">
@@ -41,12 +39,13 @@ export default class Recipe {
                     <p>${this.returnStarsHTML(this.rating)}</p>
                     <p><span class="material-icons">schedule</span>${this.time} min</p>
                     <p><span class="material-icons">attach_money</span>${this.price}</p>
-                    <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id}, 1)">add</span>
+                    <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id})">add</span>
                 </div>
             </article>
         `;
     }
 
+    // Returns recipe details for details page
     getDetailHTML() {
         let procedureHTML = "";
         for (const procedure of this.procedure) {
@@ -59,7 +58,7 @@ export default class Recipe {
                     <h2>${this.title}</h2>
                     <div class="icons" >${this.returnIconHTML(this.glutenfree, this.vegetarian, this.vegan, this.sugarfree, this.dairyfree)}</div>
                     <div>
-                        <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id}, 2)">add</span>
+                        <span id="add-${this.id}" class="material-icons" onclick="showMenu(${this.id})">add</span>
                         <span id="button-${this.id}" class="material-icons favorite" onclick="favorite(${this.id})">favorite_outline</span>
                      </div>
                 </div>
@@ -95,6 +94,7 @@ export default class Recipe {
         `;
     }
 
+    // Returns table innerHTML for every ingredient
     returnIngredientsHTML(amount) {
         let ingredientsHTML = "";
         for (const ingredient of this.ingredients) {
@@ -117,11 +117,10 @@ export default class Recipe {
         return ingredientsHTML;
     }
 
-    // Returnerer HTML med ikoner til opskriften, hvis de enkelte properties er true
+    // Returns icon HTML, if true an icon is added
     returnIconHTML(glutenfree, vegetarian, vegan, sugarfree, dairyfree) {
         let html = "";
 
-        /* Tilføj billedikoner */
         if (glutenfree) { html += `<img src="../img/gluten.png">` }
         if (vegetarian) { html += `<img src="../img/vegetarian.png">` }
         if (vegan) { html += `<img src="../img/vegan.png">` }
@@ -131,15 +130,15 @@ export default class Recipe {
         return html;
     }
 
-    // Returnerer HTML med 5 stjerner, antal udfyldte afhænger af this.rating (0-5);
+    // Returns rating HTML, returns a total of 5 stars
     returnStarsHTML(rating) {
         let html = "";
 
-        /* Tilføj udfyldt stjerne så længe i < rating */
+        /* Adds a filled out star if i < rating */
         for (let i = 0; i < rating; i++) {
             html += `<span class="material-icons">star</span>`;
         }
-        /* Tilføj omridset stjerne så længe i > rating */
+        /* Adds an outlined star if i > rating */
         for (let i = 5; i > rating; i--) {
             html += `<span class="material-icons">star_outline</span>`;
         }

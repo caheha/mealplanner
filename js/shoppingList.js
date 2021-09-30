@@ -1,3 +1,4 @@
+// ShoppingList class
 export default class ShoppingList {
     constructor(title, ingredients) {
         this.id = Date.now();
@@ -5,6 +6,7 @@ export default class ShoppingList {
         this.ingredients = ingredients;
     }
 
+    // Returns HTML for shopping lists page
     getHtml() {
         return /*html*/`
             <div onclick="shoppingListDetails(${this.id})" class="shopping-list-item">
@@ -14,6 +16,7 @@ export default class ShoppingList {
         `;
     }
 
+    // Returns shopping list details with button to check/uncheck status
     getDetailHtml() {
         let html = "";
 
@@ -27,20 +30,22 @@ export default class ShoppingList {
                 </div>
             `;
         }
-
         return html;
     }
 
+    // Changes status of ingredient to true (in shopping basket)
     checkIngredient(ingredientId) {
         let ingredientToCheck = this.ingredients.find(ingredient => ingredient.id == ingredientId);
         ingredientToCheck.status = true;
     }
 
+    // Changes status of ingredient to false (not in shopping basket)
     uncheckIngredient(ingredientId) {
         let ingredientToUncheck = this.ingredients.find(ingredient =>ingredient.id == ingredientId);
         ingredientToUncheck.status = false;
     }
 
+    // Adds an ingredient to the shopping list
     addIngredient(ingredientName, ingredientAmount) {
         let newIngredient = {
             id: Date.now(),
@@ -49,9 +54,5 @@ export default class ShoppingList {
             status: false
         }
         this.ingredients.push(newIngredient);
-    }
-
-    removeIngredient(ingredientToRemove) {
-        this.ingredients = this.ingredients.filter(ingredient => ingredient.name != ingredientToRemove.name);
     }
 }

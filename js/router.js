@@ -1,5 +1,4 @@
-class Router {
-
+export default class Router {
     constructor(app, defaultPage) {
         this.defaultPage = defaultPage;
         this.pages = app.querySelectorAll(".page");
@@ -69,5 +68,3 @@ class Router {
     }
 
 }
-
-export default Router;
