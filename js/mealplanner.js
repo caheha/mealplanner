@@ -169,13 +169,10 @@ export default class MealPlanner {
             let description = recipe.description.toLowerCase();
             let country = recipe.country.toLowerCase();
             let theme = recipe.theme.toLowerCase();
-            let holiday = recipe.holiday ? recipe.holiday.toLowerCase : "";
 
-            if (title.includes(searchValue)
-                || description.includes(searchValue)
-                || country.includes(searchValue)
-                || theme.includes(searchValue)
-                || holiday.includes(searchValue)) {
+            if (title.includes(searchValue) || description.includes(searchValue)
+                                            || country.includes(searchValue)
+                                            || theme.includes(searchValue)) {
                 results.push(recipe);
             }
         }
@@ -195,13 +192,10 @@ export default class MealPlanner {
             let description = recipe.description.toLowerCase();
             let country = recipe.country.toLowerCase();
             let theme = recipe.theme.toLowerCase();
-            let holiday = recipe.holiday ? recipe.holiday.toLowerCase : "";
 
-            if (title.includes(searchValue)
-                || description.includes(searchValue)
-                || country.includes(searchValue)
-                || theme.includes(searchValue)
-                || holiday.includes(searchValue)) {
+            if (title.includes(searchValue) || description.includes(searchValue)
+                                            || country.includes(searchValue)
+                                            || theme.includes(searchValue)) {
                 results.push(recipe);
             }
         }
@@ -211,8 +205,7 @@ export default class MealPlanner {
             let title = recipe.title.toLowerCase();
             let description = recipe.description.toLowerCase();
 
-            if (title.includes(searchValue)
-                || description.includes(searchValue)) {
+            if (title.includes(searchValue) || description.includes(searchValue)) {
                 results2.push(recipe);
             }
         }
@@ -308,7 +301,8 @@ export default class MealPlanner {
     // Casper - Creates a new food plan and adds it to current user, reset input
     createFoodPlan() {
         const nameContainer = this.domElement.querySelector("#foodplan-name");
-        this.user.addFoodPlan(new FoodPlan(nameContainer.value));
+        let title = nameContainer.value != "" ? nameContainer.value : "Unavngiven madplan";
+        this.user.addFoodPlan(new FoodPlan(title));
         nameContainer.value = "";
     }
 
@@ -439,11 +433,12 @@ export default class MealPlanner {
     // Casper - Creates new shopping list, reset input
     createShoppingList() {
         const inputTitle = this.domElement.querySelector("#shoppinglist-name");
-        this.user.addShoppingList(new ShoppingList(inputTitle.value, shoppingListIngredients));
+        let title = inputTitle.value != "" ? inputTitle.value : "Unavngiven indkøbsliste";
+        this.user.addShoppingList(new ShoppingList(title, shoppingListIngredients));
         this.user.saveUser();
 
         shoppingListIngredients = [];
-        inputTitle.value = ""
+        inputTitle.value = "";
         this.domElement.querySelector("#ingredient-list").innerHTML = "";
     }
 
@@ -473,7 +468,7 @@ export default class MealPlanner {
     appendIngredientsToList() {
         // Append 
         const container = this.domElement.querySelector("#ingredient-list");
-        const html = "";
+        let html = "";
     
         for (const ingredient of shoppingListIngredients) {   
             const removeBox = /*html*/`<div onclick="removeIngredientFromList(${ingredient.id})" class="remove-box"><span class="material-icons">close</span></div>`                  
