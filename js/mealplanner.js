@@ -31,7 +31,7 @@ export default class MealPlanner {
         this.appendShoppingLists();
     }
 
-    // Fetches recipe json, creates Recipe from each
+    // Natascha - Fetches recipe json, creates Recipe from each
     async fetchRecipes() {
         let response = await fetch(this.baseUrl);
         let data = await response.json();
@@ -44,7 +44,7 @@ export default class MealPlanner {
         return this.allRecipes;
     }
         
-    // Appends recipe HTML to page
+    // Natascha - Appends recipe HTML to page
     appendRecipes(recipes) {
         let container = this.domElement.querySelector("#recipes-container");
 
@@ -55,7 +55,7 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    // Appends favorites HTML to page
+    // Natascha - Appends favorites HTML to page
     appendFavorites(favorites, ownRecipes) {
         // Favorites
         const favoritesContainer = this.domElement.querySelector("#favorites-container");
@@ -87,7 +87,7 @@ export default class MealPlanner {
         this.updateFavoriteIcons();
     }
 
-    // Makes favorite icon green if recipe is in favorite array
+    // Natascha - Makes favorite icon green if recipe is in favorite array
     updateFavoriteIcons() {
         const favoriteIcons = this.domElement.querySelectorAll(".favorite");
         for (const icon of favoriteIcons) {
@@ -103,7 +103,7 @@ export default class MealPlanner {
         }
     }
 
-    // Appends food plans to page
+    // Natascha - Appends food plans to page
     appendFoodPlans() {
         const container = this.domElement.querySelector("#foodplans-container");
         let html = "";
@@ -117,7 +117,7 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    // Appends shopping lists to page
+    // Casper - Appends shopping lists to page
     appendShoppingLists() {
         const container = this.domElement.querySelector("#shoppinglists-container");
         let html = "";
@@ -131,7 +131,7 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    // Add or remove favorite from user
+    // Natascha - Add or remove favorite from user
     favorite(id) {
         if (!this.user.favorites.find(recipe => recipe.id == id)) {
             this.user.addFavorite(this.allRecipes.find(recipe => recipe.id == id));
@@ -140,7 +140,7 @@ export default class MealPlanner {
         }
     }
 
-    // Shows menu when '+' is clicked
+    // Casper - Shows menu when '+' is clicked
     showMenu(id) {
         const modal = this.domElement.querySelector(".click-menu-wrapper");
         const menu = this.domElement.querySelector(".click-menu");
@@ -155,12 +155,12 @@ export default class MealPlanner {
         modal.style.display = "flex";
     }
 
-    // Hides menu
+    // Casper - Hides menu
     hideMenu() {
         this.domElement.querySelector(".click-menu-wrapper").style.display = "none";
     }
     
-    // Search recipes on recipe page, appends results
+    // Natascha - Search recipes on recipe page, appends results
     search(searchValue) {
         searchValue = searchValue.toLowerCase();
         let results = [];
@@ -182,7 +182,7 @@ export default class MealPlanner {
         this.appendRecipes(results);
     }
 
-    // Search recipes on favorite page, appens results
+    // Natascha - Search recipes on favorite page, appens results
     searchFavorites(searchValue) {
         searchValue = searchValue.toLowerCase();
 
@@ -220,7 +220,7 @@ export default class MealPlanner {
         this.appendFavorites(results, results2);
     }
  
-    // Updates info on recipe details page
+    // Natascha - Updates info on recipe details page
     details(id) {
         const recipes = this.allRecipes.concat(this.user.myRecipes);
         const recipeToShow = recipes.find(recipe => recipe.id == id);
@@ -234,14 +234,14 @@ export default class MealPlanner {
         this.multiplyIngredients(id, 1);
     }
 
-    // Multiplies amount of ingredients when dropdown is used
+    // Casper - Multiplies amount of ingredients when dropdown is used
     multiplyIngredients(id, amount) {
         let array = this.allRecipes.concat(this.user.myRecipes);
         const recipeToShow = array.find(recipe => recipe.id == id);
         this.domElement.querySelector("#ingredients-table").innerHTML = recipeToShow.returnIngredientsHTML(amount);
     }
 
-    // Adds an ingredient to new recipe
+    // Natascha - Adds an ingredient to new recipe
     addIngredient() {
         // Input
         const inputAmount = this.domElement.querySelector("#input-amount");
@@ -275,7 +275,7 @@ export default class MealPlanner {
         table.innerHTML = html;
     }
 
-    // Adds a procedure to new recipe
+    // Natascha - Adds a procedure to new recipe
     addProcedure() {
         // Input
         const inputProcedure = this.domElement.querySelector("#input-procedure");
@@ -297,7 +297,7 @@ export default class MealPlanner {
         list.innerHTML = html;
     }
 
-    // Saves the new recipe to current user, resets arrays
+    // Natascha - Saves the new recipe to current user, resets arrays
     saveRecipe() {
         this.user.addRecipe(ingredients, procedures)
         this.appendFavorites(this.user.favorites, this.user.myRecipes);
@@ -305,14 +305,14 @@ export default class MealPlanner {
         procedures = [];
     }
 
-    // Creates a new food plan and adds it to current user, reset input
+    // Casper - Creates a new food plan and adds it to current user, reset input
     createFoodPlan() {
         const nameContainer = this.domElement.querySelector("#foodplan-name");
         this.user.addFoodPlan(new FoodPlan(nameContainer.value));
         nameContainer.value = "";
     }
 
-    // Updates info on food plan details page
+    // Natascha - Updates info on food plan details page
     foodPlanDetails(id) {
         const foodPlanToShow = this.user.foodPlans.find(foodPlan => foodPlan.id == id);
         this.domElement.querySelector("#food-plan-title").innerHTML = foodPlanToShow.title;
@@ -320,7 +320,7 @@ export default class MealPlanner {
         this.domElement.querySelector("#food-plan-details").innerHTML = foodPlanToShow.getDetailHTML();
     }
 
-    // Updates food plans on pick food plan page
+    // Casper - Updates food plans on pick food plan page
     addToFoodPlan(id) {
         const container = this.domElement.querySelector("#pick-food-plan-container");
         container.innerHTML = "";
@@ -329,7 +329,7 @@ export default class MealPlanner {
         }
     }
 
-    // Updates days on pick day page
+    // Casper - Updates days on pick day page
     chooseFoodPlan(foodPlanId, recipeId) {
         let foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
         let container = this.domElement.querySelector("#pick-day-container");
@@ -403,7 +403,7 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    // When day is chosen, add recipe to chosen food plan on given day, save user
+    // Casper - When day is chosen, add recipe to chosen food plan on given day, save user
     chooseDay(dayIndex, foodPlanId, recipeId) {
         const foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
         const recipe = this.allRecipes.concat(this.user.myRecipes).find(recipe => recipe.id == recipeId);
@@ -411,14 +411,14 @@ export default class MealPlanner {
         this.user.saveUser();
     }
 
-    // Removes recipe from given day, save user
+    // Casper - Removes recipe from given day, save user
     removeRecipeFromDay(foodPlanId, dayIndex) {
         const foodPlan = this.user.foodPlans.find(foodPlan => foodPlan.id == foodPlanId);
         foodPlan.removeRecipeFromDay(dayIndex);
         this.user.saveUser();
     }
 
-    // Updates create new shopping list page with ingredients from chosen recipe
+    // Casper - Updates create new shopping list page with ingredients from chosen recipe
     addRecipeToShoppingList(recipeId) {
         const recipeToAdd = this.allRecipes.concat(this.user.myRecipes).find(recipe => recipe.id == recipeId);
         this.domElement.querySelector("#shoppinglist-name").value = recipeToAdd.title;
@@ -436,7 +436,7 @@ export default class MealPlanner {
         this.appendIngredientsToList();
     }
 
-    // Creates new shopping list, reset input
+    // Casper - Creates new shopping list, reset input
     createShoppingList() {
         const inputTitle = this.domElement.querySelector("#shoppinglist-name");
         this.user.addShoppingList(new ShoppingList(inputTitle.value, shoppingListIngredients));
@@ -447,7 +447,7 @@ export default class MealPlanner {
         this.domElement.querySelector("#ingredient-list").innerHTML = "";
     }
 
-    // Add a new ingredient to temporary array, update dom
+    // Casper - Add a new ingredient to temporary array, update dom
     addIngredientToShoppingList() {
         const ingredientName = this.domElement.querySelector("#ingredient-name");
         const ingredientAmount = this.domElement.querySelector("#ingredient-amount");
@@ -469,7 +469,7 @@ export default class MealPlanner {
         }
     }
 
-    // Updates DOM with current ingredient list
+    // Casper - Updates DOM with current ingredient list
     appendIngredientsToList() {
         // Append 
         const container = this.domElement.querySelector("#ingredient-list");
@@ -487,13 +487,13 @@ export default class MealPlanner {
         container.innerHTML = html;
     }
 
-    // Removes an ingredient from temporary array, update DOM
+    // Casper - Removes an ingredient from temporary array, update DOM
     removeIngredientFromList(ingredientId) {
         shoppingListIngredients = shoppingListIngredients.filter(ingredient => ingredient.id != ingredientId);
         this.appendIngredientsToList();
     }
 
-    // Updates shopping list details page
+    // Casper - Updates shopping list details page
     shoppingListDetails(id) {
         const shoppingListToShow = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
         this.domElement.querySelector("#shopping-list-title").innerHTML = shoppingListToShow.title;
@@ -501,7 +501,7 @@ export default class MealPlanner {
         this.domElement.querySelector("#shopping-list-details").innerHTML = shoppingListToShow.getDetailHtml();
     }
 
-    // Changes state to 'in basket', update dom
+    // Natascha - Changes state to 'in basket', update dom
     checkIngredient(id, ingredientId) {
         const shoppingListToEdit = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
         shoppingListToEdit.checkIngredient(ingredientId);
@@ -509,7 +509,7 @@ export default class MealPlanner {
         this.domElement.querySelector("#shopping-list-details").innerHTML = shoppingListToEdit.getDetailHtml();
     }
 
-    // Changes state to 'not in basket', update dom
+    // Natascha - Changes state to 'not in basket', update dom
     uncheckIngredient(id, ingredientId) {
             const shoppingListToEdit = this.user.shoppingLists.find(shoppingList => shoppingList.id == id);
             shoppingListToEdit.uncheckIngredient(ingredientId);

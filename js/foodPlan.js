@@ -8,19 +8,19 @@ export default class FoodPlan {
         this.updateImage();
     }
 
-    // Adds a recipe to day index
+    // Casper - Adds a recipe to day index
     addRecipeToDay(index, recipe) {
         this.days[index] = recipe;
         this.updateImage();
     }
 
-    // Removes recipe from day index
+    // Casper - Removes recipe from day index
     removeRecipeFromDay(index) {
         this.days[index] = {};
         this.updateImage();
     }
 
-    // Updates which image is shown on food plans page
+    // Casper - Updates which image is shown on food plans page
     updateImage() {
         for (const recipe of this.days) {
             if (recipe.img) {
@@ -34,7 +34,7 @@ export default class FoodPlan {
         }
     }
 
-    // Updates image, returns HTML to show on food plans page 
+    // Natascha - Updates image, returns HTML to show on food plans page 
     getHtml() {
         this.updateImage();
         return /*html*/`
@@ -53,7 +53,7 @@ export default class FoodPlan {
         `;
     }
 
-    // Returns food plan details for details page
+    // Natascha - Returns food plan details for details page
     getDetailHTML() {
         let html = "";
         let day = "";
@@ -119,7 +119,7 @@ export default class FoodPlan {
         return html;
     }
 
-    // Returns HTML for picking food plan when you want to add a recipe
+    // Casper - Returns HTML for picking food plan when you want to add a recipe
     getPickHtml(id) {
         return /*html*/`
             <article class="food-plan">

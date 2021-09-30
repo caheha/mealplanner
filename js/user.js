@@ -39,24 +39,24 @@ export default class User {
         }
     }
 
-    // Save the current user to localStorage
+    // Casper - Save the current user to localStorage
     saveUser() {
         localStorage.setItem("user", JSON.stringify(this));
     }
 
-    // Add recipe to favorites array
+    // Natascha - Add recipe to favorites array
     addFavorite(recipeToAdd) {
         this.favorites.push(recipeToAdd);
         this.saveUser();
     }
 
-    // Remove recipe from favorites by filtering id
+    // Natascha - Remove recipe from favorites by filtering id
     removeFavorite(recipeIdToRemove) {
         this.favorites = this.favorites.filter(recipe => recipe.id != recipeIdToRemove);
         this.saveUser();
     }
 
-    // Add a recipe to myRecipes w/ input validation, reset input fields
+    // Casper - Add a recipe to myRecipes w/ input validation, reset input fields
     addRecipe(ingredients, procedure) {
         let nameInput = document.getElementById("input-name").value;
         let imgInput = document.getElementById("input-img").value;
@@ -78,25 +78,25 @@ export default class User {
         this.saveUser();
     }
 
-    // Adds food plan to user foodPlans
+    // Casper - Adds food plan to user foodPlans
     addFoodPlan(foodPlanToAdd) {
         this.foodPlans.push(foodPlanToAdd);
         this.saveUser();
     }
 
-    // Removes food plan by filtering with id
+    // Casper - Removes food plan by filtering with id
     removeFoodPlan(id) {
         this.foodPlans = this.foodPlans.filter(foodPlan => foodPlan.id != id);
         this.saveUser();
     }
 
-    // Adds shopping list to user shoppingLists
+    // Casper - Adds shopping list to user shoppingLists
     addShoppingList(shoppingListToAdd) {
         this.shoppingLists.push(shoppingListToAdd);
         this.saveUser();
     }
 
-    // Removes shopping list by filtering with id
+    // Casper - Removes shopping list by filtering with id
     removeShoppinglist(id) {
         this.shoppingLists = this.shoppingLists.filter(shoppingList => shoppingList.id != id);
         this.saveUser();

@@ -25,7 +25,7 @@ export default class Recipe {
         this.procedure = procedure;   
     }
 
-    // Returns HTML on search/favorites page
+    // Natascha - Returns HTML on search/favorites page
     getHtml() {
         return /*html*/`
             <article class="recipe-container">
@@ -45,7 +45,7 @@ export default class Recipe {
         `;
     }
 
-    // Returns recipe details for details page
+    // Natascha - Returns recipe details for details page
     getDetailHTML() {
         let procedureHTML = "";
         for (const procedure of this.procedure) {
@@ -94,7 +94,7 @@ export default class Recipe {
         `;
     }
 
-    // Returns table innerHTML for every ingredient
+    // Natascha - Returns table innerHTML for every ingredient
     returnIngredientsHTML(amount) {
         let ingredientsHTML = "";
         for (const ingredient of this.ingredients) {
@@ -117,7 +117,7 @@ export default class Recipe {
         return ingredientsHTML;
     }
 
-    // Returns icon HTML, if true an icon is added
+    // Casper - Returns icon HTML, if true an icon is added
     returnIconHTML(glutenfree, vegetarian, vegan, sugarfree, dairyfree) {
         let html = "";
 
@@ -130,7 +130,7 @@ export default class Recipe {
         return html;
     }
 
-    // Returns rating HTML, returns a total of 5 stars
+    // Casper - Returns rating HTML, returns a total of 5 stars
     returnStarsHTML(rating) {
         let html = "";
 
