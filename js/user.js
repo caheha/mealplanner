@@ -62,7 +62,7 @@ export default class User {
         let imgInput = document.getElementById("input-img").value;
         let descriptionInput = document.getElementById("input-description").value;
 
-        if (nameInput && imgInput && descriptionInput && ingredients.length > 0) {
+        if (nameInput && ingredients.length > 0) {
             let newRecipe = new Recipe(nameInput, descriptionInput, imgInput, 0, 0, 0, null, 
                                        null, null, null, null, null, null, null, null, 
                                        ingredients, procedure);
